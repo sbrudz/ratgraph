@@ -18,7 +18,7 @@ var xAxis = d3.svg.axis().scale(x)
 var yAxis = d3.svg.axis().scale(y)
   .orient("left").ticks(6);
 
-var svg = d3.select("body")
+var svg = d3.select("div#d3_histogram")
   .append("svg")
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
@@ -71,5 +71,16 @@ d3.csv("data/Rat_Sightings.csv", function(error, data) {
       .attr("dy", ".71em")
       .style("text-anchor", "end")
       .text("Number of Sightings");
+
+  var graph = new Rickshaw.Graph({
+        element: document.querySelector("#rickshaw_histogram"),
+        renderer: 'bar',
+        series: [{
+                data: histData.map(function(d) { var pair = {}; pair["x"] = +d.x; pair["y"] = d.y; return pair; }),
+                color: 'steelblue'
+        }]
+  });
+  var axes = new Rickshaw.Graph.Axis.Time( { graph: graph } );
+  graph.render();
 
 });
