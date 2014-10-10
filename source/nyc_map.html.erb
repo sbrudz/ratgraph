@@ -1,0 +1,67 @@
+<style>
+
+.zipcode path{
+  fill: none;
+  stroke: #fff;
+  stroke-linejoin: round;
+  fill:rgb(107,174,214); 
+}
+
+.q0-9 { fill:rgb(247,251,255); }
+.q1-9 { fill:rgb(222,235,247); }
+.q2-9 { fill:rgb(198,219,239); }
+.q3-9 { fill:rgb(158,202,225); }
+.q4-9 { fill:rgb(107,174,214); }
+.q5-9 { fill:rgb(66,146,198); }
+.q6-9 { fill:rgb(33,113,181); }
+.q7-9 { fill:rgb(8,81,156); }
+.q8-9 { fill:rgb(8,48,107); }
+
+</style>
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://d3js.org/queue.v1.min.js"></script>
+<script src="http://d3js.org/topojson.v1.min.js"></script>
+<script>
+	var margin = {top: 30, right: 30, bottom: 30, left: 30},
+	    width = 960 - margin.left - margin.right,
+	    height = 760 - margin.top - margin.bottom;
+
+	var projection = d3.geo.conicConformal()
+	      .parallels([40 + 40 / 60, 41 + 2 / 60])
+	      .scale(70000)
+	      .rotate([74, -40 - 45 / 60]);
+
+	var path = d3.geo.path().projection(projection);
+
+    var svg = d3.select("body")
+    	.append("svg")
+    	.attr("width", width)
+    	.attr("height", height);
+
+	queue().defer(d3.json, "data/nyc-zip-code.json")
+		.defer(d3.csv("data/Rat_Sightings.csv"))
+		.await(ready);
+
+	function ready(error, nyc, data) {
+
+		var groupedData = d3.nest()
+			.key(function(d) { return d["Incident Zip"]; })
+			.rollup(function(leaves) { return leaves.length; })
+			.entries(data);
+
+		var quantize = d3.scale.quantize()
+	    	.domain(d3.extent(groupedData, function(d) { return d.values; }))
+	    	.range(d3.range(9).map(function(i) { return "q" + i + "-9"; }));
+
+		svg.append("g")
+			.attr("class", "zipcode")
+			.selectAll("path")
+			.data(nyc.features)
+			.enter().append("path")
+			.attr("class", function(d) { return quantize(rateById.get(d["Incident Zip"])); })
+			.attr("d", path);
+
+	}
+
+</script>

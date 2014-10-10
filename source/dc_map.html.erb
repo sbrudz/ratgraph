@@ -1,0 +1,230 @@
+<link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/dc/1.7.0/dc.css"/>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.11/crossfilter.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/dc/1.7.0/dc.js"></script>
+
+<style type="text/css" media="screen">
+
+h1 {
+	text-align: center;
+}
+
+h2 {
+	display: inline;
+	margin: 2px;
+}
+
+section {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+aside {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#choropleth path{
+	stroke: gray;
+	stroke-linejoin: round;
+}
+
+#choropleth {
+	border: 1px solid lightgray;
+	padding: 10px;
+	margin: 10px;
+}
+
+aside > div {
+	padding: 5px;
+	margin: 5px;	
+}
+
+#legend {
+    padding: 0;
+    float: right;
+}
+
+.list-inline, .list-inline>li {
+	list-style: none;
+	display: inline-block;
+	padding: 0;
+}
+
+li.key {
+    border-top-width: 15px;
+    border-top-style: solid;
+    font-size: .9em;
+    width: 30px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+</style>
+
+<h1>Reported Rat Sightings in NYC from 2010 to 2014</h1>
+<section>
+	<div id="choropleth">
+		<div id="legend"></div>
+		<div>
+			<h2>By Zip Code</h2>
+			<span class="reset" style="display: none;">Current filter: <span class="filter"></span></span> 
+			<a class="reset" href="javascript:choropleth.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+		</div>
+	</div>
+	<aside>
+		<div id="histogram">
+			<div>
+				<h2>By Month</h2>
+				<span class="reset" style="display: none;">Current filter: <span class="filter"></span></span> 
+				<a class="reset" href="javascript:histogram.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+			</div>
+		</div>
+		<div id="pie">
+			<div>
+				<h2>By Borough</h2>
+				<span class="reset" style="display: none;">Current filter: <span class="filter"></span></span> 
+				<a class="reset" href="javascript:pie.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+			</div>
+		</div>
+	</aside>
+</section>
+
+<script>
+
+	var mapWidth = 600, mapHeight = 700;
+
+	var parseDate = d3.time.format("%m/%d/%Y %I:%M:%S %p").parse;
+	var formatDate = d3.time.format("%m/%y");
+	var formatCount = d3.format(",.0f");
+
+
+	// Thanks to http://colorbrewer2.org/
+	var colorScale = d3.scale.quantize().range(['rgb(255,255,229)','rgb(247,252,185)','rgb(217,240,163)','rgb(173,221,142)','rgb(120,198,121)','rgb(65,171,93)','rgb(35,132,67)','rgb(0,104,55)','rgb(0,69,41)']);
+
+	// Figure out scale and translate for geo projection
+	// Thanks to http://stackoverflow.com/questions/14492284/center-a-map-in-d3-given-a-geojson-object
+	// Create a unit projection.
+	var projection = d3.geo.albers()
+	    .scale(1)
+	    .translate([0, 0]);
+
+	// Create a path generator.
+	var path = d3.geo.path()
+	    .projection(projection);
+
+	var choropleth = dc.geoChoroplethChart("#choropleth");
+	var histogram = dc.barChart("#histogram");
+	var pie = dc.pieChart("#pie");
+
+
+	d3.csv("data/Rat_Sightings.csv", function(error, rawData) {
+
+		rawData.forEach(function(d) {
+			d.created_date = parseDate(d["Created Date"]);
+			d.month = d3.time.month(d.created_date);
+		});
+
+		var data = crossfilter(rawData);
+		var all = data.groupAll();
+
+		var zipCodes = data.dimension(function(d) {
+			return d["Incident Zip"];
+		});
+		var zipCodeCounts = zipCodes.group();
+
+		var time = data.dimension(function(d) {
+		    return d.month;
+		});
+		var timeCounts = time.group().reduceCount();
+
+		var borough = data.dimension(function(d) {
+			return d["Borough"];
+		});
+		var boroughCounts = borough.group().reduceCount();
+
+		colorScale.domain([dc.utils.groupMin(zipCodeCounts, function(d) { return d.value; }),
+					dc.utils.groupMax(zipCodeCounts, function(d) { return d.value; })]);
+
+		var timeScale = d3.time.scale().domain([(new Date(2010,12,31)), (new Date(2014,10,01))]);
+
+		d3.json("data/nyc-zip-code.json", function(nycZipJson) {
+
+			// Compute the bounds of a feature of interest, then derive scale & translate.
+			var b = path.bounds(nycZipJson),
+			    s = .95 / Math.max((b[1][0] - b[0][0]) / mapWidth, (b[1][1] - b[0][1]) / mapHeight),
+			    t = [(mapWidth - s * (b[1][0] + b[0][0])) / 2, (mapHeight - s * (b[1][1] + b[0][1])) / 2];
+
+			// Update the projection to use computed scale & translate.
+			projection
+			    .scale(s)
+			    .translate(t);
+
+			choropleth.width(mapWidth)
+				.height(mapHeight)
+				.dimension(zipCodes)
+				.group(zipCodeCounts, "Rat Sightings by Zip Code")
+				.colors(colorScale)
+				.colorCalculator(function(d) {
+					return d ? choropleth.colors()(d) : 'gray';
+				})
+				.overlayGeoJson(nycZipJson.features, "zip_code", function(d) {
+					return d.properties.ZIP;
+				})
+				.projection(projection)
+				.title(function(d) {
+					return "Zip Code: " + d.key + "\nNumber of Sightings: " + d.value;
+				});
+
+			// Create a legend for the choropleth
+			// Thanks to http://eyeseast.github.io/visible-data/2013/08/27/responsive-legends-with-d3/
+			var legend = d3.select('#legend')
+				.append('ul')
+			    .attr('class', 'list-inline');
+
+			var keys = legend.selectAll('li.key')
+			    .data(colorScale.range());
+
+			keys.enter().append('li')
+			    .attr('class', 'key')
+			    .style('border-top-color', String)
+			    .text(function(d) {
+			        var r = colorScale.invertExtent(d);
+			        return formatCount(r[0]);
+			    });
+
+			histogram.width(600)
+				.height(400)
+				.margins({top: 10, right: 10, bottom: 20, left: 40})
+				.dimension(time)
+				.group(timeCounts)
+				.x(timeScale)
+				.round(d3.time.month.round)
+				.xUnits(d3.time.months)
+				.elasticY(true)
+				.renderHorizontalGridLines(true);
+
+			pie.width(250)
+				.height(250)
+				.dimension(borough)
+				.group(boroughCounts)
+				.colors(d3.scale.category10())
+				.label(function (d) {
+		            if (pie.hasFilter() && !pie.hasFilter(d.data.key))
+		                return d.data.key + " (0%)";
+		            var label = d.data.key;
+		            if(all.value())
+		                label += " (" + Math.floor(d.data.value / all.value() * 100) + "%)";
+		            return label;
+		        });
+
+			dc.renderAll();
+		});
+
+	});
+
+
+</script>
