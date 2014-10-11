@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/dc/1.7.0/dc.css"/>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.11/crossfilter.min.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/dc/1.7.0/dc.js"></script>
+<%= javascript_include_tag  "dc" %>
 
 <style type="text/css" media="screen">
 
@@ -146,10 +146,10 @@ li.key {
 		});
 		var boroughCounts = borough.group().reduceCount();
 
-		colorScale.domain([dc.utils.groupMin(zipCodeCounts, function(d) { return d.value; }),
-					dc.utils.groupMax(zipCodeCounts, function(d) { return d.value; })]);
-
 		var timeScale = d3.time.scale().domain([(new Date(2010,12,31)), (new Date(2014,10,01))]);
+
+		// colorScale.domain([dc.utils.groupMin(zipCodeCounts, function(d) { return d.value; }),
+		// 	dc.utils.groupMax(zipCodeCounts, function(d) { return d.value; })]);
 
 		d3.json("data/nyc-zip-code.json", function(nycZipJson) {
 
@@ -168,6 +168,9 @@ li.key {
 				.dimension(zipCodes)
 				.group(zipCodeCounts, "Rat Sightings by Zip Code")
 				.colors(colorScale)
+				.colorAccessor(function(d) {
+					return d.value;
+				})
 				.colorCalculator(function(d) {
 					return d ? choropleth.colors()(d) : 'gray';
 				})
@@ -178,6 +181,8 @@ li.key {
 				.title(function(d) {
 					return "Zip Code: " + d.key + "\nNumber of Sightings: " + d.value;
 				});
+
+			choropleth.calculateColorDomain();
 
 			// Create a legend for the choropleth
 			// Thanks to http://eyeseast.github.io/visible-data/2013/08/27/responsive-legends-with-d3/
@@ -207,19 +212,39 @@ li.key {
 				.elasticY(true)
 				.renderHorizontalGridLines(true);
 
+
 			pie.width(250)
 				.height(250)
 				.dimension(borough)
 				.group(boroughCounts)
 				.colors(d3.scale.category10())
 				.label(function (d) {
-		            if (pie.hasFilter() && !pie.hasFilter(d.data.key))
-		                return d.data.key + " (0%)";
-		            var label = d.data.key;
+		            if (pie.hasFilter() && !pie.hasFilter(d.key))
+		                return d.key + " (0%)";
+		            var label = d.key;
 		            if(all.value())
-		                label += " (" + Math.floor(d.data.value / all.value() * 100) + "%)";
+		                label += " (" + Math.floor(d.value / all.value() * 100) + "%)";
 		            return label;
 		        });
+
+//			var updateChloroplethScale = function(chart, filter) {
+			choropleth.renderlet(function(chart) {
+				var domain = [d3.min(choropleth.group().all(), choropleth.colorAccessor()),
+							  d3.max(choropleth.group().all(), choropleth.colorAccessor())];
+				choropleth.colorDomain(domain);
+
+				d3.select('#legend').selectAll('li.key')
+				    .data(choropleth.colors().range())
+				    .text(function(d) {
+				        var r = colorScale.invertExtent(d);
+				        return formatCount(r[0]);
+				    });
+
+			});
+
+			// pie.on('filtered', updateChloroplethScale);
+			// histogram.on('filtered', updateChloroplethScale);
+			// choropleth.on('click', updateChloroplethScale);
 
 			dc.renderAll();
 		});
