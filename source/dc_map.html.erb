@@ -227,24 +227,23 @@ li.key {
 		            return label;
 		        });
 
-//			var updateChloroplethScale = function(chart, filter) {
-			choropleth.renderlet(function(chart) {
+			var updateChloroplethScale = function(chart, filter) {
 				var domain = [d3.min(choropleth.group().all(), choropleth.colorAccessor()),
 							  d3.max(choropleth.group().all(), choropleth.colorAccessor())];
 				choropleth.colorDomain(domain);
+			}
+			pie.on('filtered', updateChloroplethScale);
+			histogram.on('filtered', updateChloroplethScale);
 
+			choropleth.renderlet(function(chart) {
 				d3.select('#legend').selectAll('li.key')
-				    .data(choropleth.colors().range())
+				    .data(chart.colors().range())
 				    .text(function(d) {
-				        var r = colorScale.invertExtent(d);
+				        var r = chart.colors().invertExtent(d);
 				        return formatCount(r[0]);
 				    });
 
 			});
-
-			// pie.on('filtered', updateChloroplethScale);
-			// histogram.on('filtered', updateChloroplethScale);
-			// choropleth.on('click', updateChloroplethScale);
 
 			dc.renderAll();
 		});
