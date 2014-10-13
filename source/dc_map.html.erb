@@ -4,27 +4,86 @@
 <%= javascript_include_tag  "dc" %>
 
 <style type="text/css" media="screen">
+html, body {
+	height: 100%;
+}
+
+section {
+	height: 90%;
+	display: flex;
+	justify-content: center;
+}
+
+#filters {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+@media all and (orientation: landscape) {
+	section {
+		flex-direction: row;
+	}
+
+	#choropleth {
+		width: 38.2%;
+		height: 100%;
+	}
+
+	#filters {
+		width: 61.8%;
+		height: 100%;
+		flex-direction: column;
+	}
+
+	#histogram {
+		width: 100%;
+		height: 61.8%;
+	}
+
+	#pie {
+		width: 61.8%;
+		height: 38.2%;
+	}
+
+}
+
+@media all and (orientation: portrait) {
+	section {
+		flex-direction: column;
+	}
+
+	#choropleth {
+		width: 100%;
+		height: 61.8%;
+	}
+
+	#filters {
+		width: 100%;
+		height: 38.2%;
+		flex-direction: row;
+	}
+
+	#histogram {
+		width: 61.8%;
+		height: 100%;
+	}
+
+	#pie {
+		width: 38.2%;
+		height: 100%;
+	}
+}
 
 h1 {
 	text-align: center;
+	height: 10%;
+	margin: 0;
 }
 
 h2 {
 	display: inline;
 	margin: 2px;
-}
-
-section {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-}
-
-aside {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
 }
 
 #choropleth path{
@@ -33,34 +92,43 @@ aside {
 }
 
 #choropleth {
-	border: 1px solid lightgray;
-	padding: 10px;
-	margin: 10px;
+//	border: 1px solid lightgray;
+	position: relative;
+	padding: 0px;
+	margin: 0px;
 }
 
 aside > div {
-	padding: 5px;
-	margin: 5px;	
+	padding: 0px;
+	margin: 0px;	
 }
 
 #legend {
     padding: 0;
-    float: right;
+    position: absolute;
+    top: 0;
+    right: 1em;
 }
 
 .list-inline, .list-inline>li {
 	list-style: none;
-	display: inline-block;
+//	display: inline-block;
 	padding: 0;
 }
 
 li.key {
-    border-top-width: 15px;
-    border-top-style: solid;
+    border-right-width: 15px;
+    border-right-style: solid;
     font-size: .9em;
-    width: 30px;
+    height: 1.8em;
     padding-left: 0;
-    padding-right: 0;
+    padding-right: 5px;
+    padding-top: .2em;
+    text-align: right;
+}
+
+.clearfix {
+	clear: both;
 }
 
 </style>
@@ -75,7 +143,7 @@ li.key {
 			<a class="reset" href="javascript:choropleth.filterAll();dc.redrawAll();" style="display: none;">reset</a>
 		</div>
 	</div>
-	<aside>
+	<aside id="filters">
 		<div id="histogram">
 			<div>
 				<h2>By Month</h2>
@@ -95,7 +163,22 @@ li.key {
 
 <script>
 
-	var mapWidth = 600, mapHeight = 700;
+	var margin = {top: 10, left: 10, bottom: 10, right: 10};
+
+	var mapWidth = parseInt(d3.select('#choropleth').style('width'))
+	  , mapWidth = mapWidth - margin.left - margin.right
+	  , mapHeight = parseInt(d3.select('#choropleth').style('height'))
+	  , mapHeight = mapHeight - margin.top - margin.bottom;
+
+	var histWidth = parseInt(d3.select('#histogram').style('width'))
+	  , histWidth = histWidth - margin.left - margin.right
+	  , histHeight = parseInt(d3.select('#histogram').style('height'))
+	  , histHeight = histHeight - margin.top - margin.bottom;
+
+	var pieWidth = parseInt(d3.select('#pie').style('width'))
+	  , pieWidth = pieWidth - margin.left - margin.right
+	  , pieHeight = parseInt(d3.select('#pie').style('height'))
+	  , pieHeight = pieHeight - margin.top - margin.bottom;
 
 	var parseDate = d3.time.format("%m/%d/%Y %I:%M:%S %p").parse;
 	var formatDate = d3.time.format("%m/%y");
@@ -148,9 +231,6 @@ li.key {
 
 		var timeScale = d3.time.scale().domain([(new Date(2010,12,31)), (new Date(2014,10,01))]);
 
-		// colorScale.domain([dc.utils.groupMin(zipCodeCounts, function(d) { return d.value; }),
-		// 	dc.utils.groupMax(zipCodeCounts, function(d) { return d.value; })]);
-
 		d3.json("data/nyc-zip-code.json", function(nycZipJson) {
 
 			// Compute the bounds of a feature of interest, then derive scale & translate.
@@ -195,14 +275,14 @@ li.key {
 
 			keys.enter().append('li')
 			    .attr('class', 'key')
-			    .style('border-top-color', String)
+			    .style('border-right-color', String)
 			    .text(function(d) {
 			        var r = colorScale.invertExtent(d);
 			        return formatCount(r[0]);
 			    });
 
-			histogram.width(600)
-				.height(400)
+			histogram.width(histWidth)
+				.height(histHeight)
 				.margins({top: 10, right: 10, bottom: 20, left: 40})
 				.dimension(time)
 				.group(timeCounts)
@@ -213,8 +293,8 @@ li.key {
 				.renderHorizontalGridLines(true);
 
 
-			pie.width(250)
-				.height(250)
+			pie.width(pieWidth)
+				.height(pieHeight)
 				.dimension(borough)
 				.group(boroughCounts)
 				.colors(d3.scale.category10())
