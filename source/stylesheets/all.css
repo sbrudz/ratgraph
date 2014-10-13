@@ -1,20 +1,44 @@
 @charset "utf-8";
 
 body {
-  font: 10px sans-serif;
+	font-size: 14px;
+	font-family: Helvetica, Arial, sans-serif;
 }
 
-.bar rect {
-  fill: steelblue;
-  shape-rendering: crispEdges;
+section.content {
+	position: relative;
+	width: 800px;
+	margin: auto;
 }
 
-.bar text {
-  fill: #fff;
+p {
+	text-align: justify;
 }
 
-.axis path, .axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
+section.content > p {
+	width: 800px;
+}
+
+section.content > aside {
+	position: absolute;
+	left: 830px;
+	width: 250px;
+	color: #999;
+	font-size: 0.8rem;
+}
+
+iframe {
+	width: 760px;
+	border: none;
+	height: 500px;
+	overflow: hidden;
+}
+
+figure {
+	padding: 0px 20px;
+}
+
+figcaption {
+	font-size: .8rem;
+	padding: 5px 0px;
 }
