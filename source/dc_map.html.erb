@@ -42,7 +42,7 @@ section {
 	}
 
 	#pie {
-		width: 61.8%;
+		width: 38.2%;
 		height: 38.2%;
 	}
 
@@ -92,7 +92,6 @@ h2 {
 }
 
 #choropleth {
-//	border: 1px solid lightgray;
 	position: relative;
 	padding: 0px;
 	margin: 0px;
@@ -104,27 +103,39 @@ aside > div {
 }
 
 #legend {
-    padding: 0;
     position: absolute;
-    top: 0;
-    right: 1em;
+    top: 3em;
+    left: 1em;
+    height: 40%;
+    min-height: 12em;
+}
+
+.list-inline {
+	border: 1px solid lightgray;
+    padding: 5px;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	align-content: stretch;
 }
 
 .list-inline, .list-inline>li {
 	list-style: none;
-//	display: inline-block;
-	padding: 0;
+	margin: 0;
 }
 
 li.key {
-    border-right-width: 15px;
-    border-right-style: solid;
+	padding: 0;
+	display: block;
+	flex-grow: 1;
+    border-left-width: 15px;
+    border-left-style: solid;
     font-size: .9em;
     height: 1.8em;
-    padding-left: 0;
-    padding-right: 5px;
+    padding-left: 5px;
+    padding-right: 0px;
     padding-top: .2em;
-    text-align: right;
 }
 
 .clearfix {
@@ -275,7 +286,7 @@ li.key {
 
 			keys.enter().append('li')
 			    .attr('class', 'key')
-			    .style('border-right-color', String)
+			    .style('border-left-color', String)
 			    .text(function(d) {
 			        var r = colorScale.invertExtent(d);
 			        return formatCount(r[0]);
