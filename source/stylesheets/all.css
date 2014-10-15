@@ -5,6 +5,14 @@ body {
 	font-family: Helvetica, Arial, sans-serif;
 }
 
+@media (max-width: 900px) {
+	html { font-size: 12px; }
+}
+@media (max-width: 400px) {
+	html { font-size: 10px; }
+}
+
+
 section.content {
 	position: relative;
 	width: 800px;
