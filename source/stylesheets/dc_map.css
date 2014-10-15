@@ -12,14 +12,21 @@ section {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	flex-direction: column;
 }
 
 #smallCharts {
 	display: flex;
+	justify-content: stretch;
+	align-items: stretch;
 }
 
 .filter, .reset {
 	font-size: .6rem;
+}
+
+#smallCharts > div {
+	width: 33.3%;
 }
 
 @media all and (orientation: landscape) {
@@ -35,17 +42,16 @@ section {
 	#filters {
 		width: 61.8%;
 		height: 100%;
-		flex-direction: column;
 	}
 
 	#histogram {
 		width: 100%;
-		height: 61.8%;
+		height: 50%;
 	}
 
 	#smallCharts {
 		width: 100%;
-		height: 38.2%;
+		height: 50%;
 	}
 
 }
@@ -57,23 +63,22 @@ section {
 
 	#choropleth {
 		width: 100%;
-		height: 61.8%;
+		height: 50%;
 	}
 
 	#filters {
 		width: 100%;
-		height: 38.2%;
-		flex-direction: row;
+		height: 50%;
 	}
 
 	#histogram {
-		width: 61.8%;
-		height: 100%;
+		width: 100%;
+		height: 50%;
 	}
 
 	#smallCharts {
-		width: 38.2%;
-		height: 100%;
+		width: 100%;
+		height: 50%;
 	}
 }
 

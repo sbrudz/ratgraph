@@ -1,19 +1,18 @@
 var margin = {top: 10, left: 10, bottom: 10, right: 10};
 
-var mapWidth = parseInt(d3.select('#choropleth').style('width'))
-  , mapWidth = mapWidth - margin.left - margin.right
-  , mapHeight = parseInt(d3.select('#choropleth').style('height'))
-  , mapHeight = mapHeight - margin.top - margin.bottom;
+function calculateSvgSize(id, margin) {
+	var width = parseInt(d3.select(id).style('width'))
+	  , width = width - margin.left - margin.right
+	  , height = parseInt(d3.select(id).style('height'))
+	  , height = height - margin.top - margin.bottom;
+	return {height: height, width: width};  
+};
 
-var histWidth = parseInt(d3.select('#histogram').style('width'))
-  , histWidth = histWidth - margin.left - margin.right
-  , histHeight = parseInt(d3.select('#histogram').style('height'))
-  , histHeight = histHeight - margin.top - margin.bottom;
-
-// var pieWidth = parseInt(d3.select('#pie').style('width'))
-//   , pieWidth = pieWidth - margin.left - margin.right
-//   , pieHeight = parseInt(d3.select('#pie').style('height'))
-//   , pieHeight = pieHeight - margin.top - margin.bottom;
+var mapSize = calculateSvgSize('#choropleth', margin);
+var histSize = calculateSvgSize('#histogram', margin);
+var boroughSize = calculateSvgSize('#boroughRow', margin);
+var typeSize = calculateSvgSize('#typeRow', margin);
+var topZipCodesSize = calculateSvgSize('#topZipCodes', margin);
 
 var parseDate = d3.time.format("%m/%d/%Y %I:%M:%S %p").parse;
 var formatDate = d3.time.format("%m/%y");
@@ -81,16 +80,16 @@ d3.csv("data/nyc_rodent_complaints.csv", function(error, rawData) {
 
 		// Compute the bounds of a feature of interest, then derive scale & translate.
 		var b = path.bounds(nycZipJson),
-		    s = .95 / Math.max((b[1][0] - b[0][0]) / mapWidth, (b[1][1] - b[0][1]) / mapHeight),
-		    t = [(mapWidth - s * (b[1][0] + b[0][0])) / 2, (mapHeight - s * (b[1][1] + b[0][1])) / 2];
+		    s = .95 / Math.max((b[1][0] - b[0][0]) / mapSize.width, (b[1][1] - b[0][1]) / mapSize.height),
+		    t = [(mapSize.width - s * (b[1][0] + b[0][0])) / 2, (mapSize.height - s * (b[1][1] + b[0][1])) / 2];
 
 		// Update the projection to use computed scale & translate.
 		projection
 		    .scale(s)
 		    .translate(t);
 
-		choropleth.width(mapWidth)
-			.height(mapHeight)
+		choropleth.width(mapSize.width)
+			.height(mapSize.height)
 			.dimension(zipCodes)
 			.group(zipCodeCounts, "Rat Sightings by Zip Code")
 			.colors(colorScale)
@@ -127,8 +126,8 @@ d3.csv("data/nyc_rodent_complaints.csv", function(error, rawData) {
 		        return formatCount(r[0]);
 		    });
 
-		histogram.width(histWidth)
-			.height(histHeight)
+		histogram.width(histSize.width)
+			.height(histSize.height)
 			.margins({top: 10, right: 10, bottom: 20, left: 40})
 			.dimension(time)
 			.group(timeCounts)
@@ -138,7 +137,10 @@ d3.csv("data/nyc_rodent_complaints.csv", function(error, rawData) {
 			.elasticY(true)
 			.renderHorizontalGridLines(true);
 
-        boroughRow.dimension(borough)
+        boroughRow
+        	.width(boroughSize.width)
+        	.height(boroughSize.height)
+        	.dimension(borough)
         	.group(boroughCounts)
         	.elasticX(true)
         	.ordering(function (d) {
@@ -148,7 +150,10 @@ d3.csv("data/nyc_rodent_complaints.csv", function(error, rawData) {
 
 		boroughRow.xAxis().ticks(5);
 
-		typeRow.dimension(type)
+		typeRow
+			.width(typeSize.width)
+			.height(typeSize.height)
+			.dimension(type)
 			.group(typeCounts)
 			.elasticX(true)
         	.ordering(function (d) {
@@ -158,7 +163,10 @@ d3.csv("data/nyc_rodent_complaints.csv", function(error, rawData) {
 
 		typeRow.xAxis().ticks(5);
 
-		topZipCodes.dimension(zipCodes)
+		topZipCodes
+			.width(topZipCodesSize.width)
+			.height(topZipCodesSize.height)
+			.dimension(zipCodes)
 			.group(zipCodeCounts)
 			.data(function(group) {
 				return group.top(5);
