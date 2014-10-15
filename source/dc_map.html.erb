@@ -11,13 +11,6 @@
 		</div>
 	</div>
 	<aside id="filters">
-		<div id="histogram">
-			<div>
-				<h2>By Month</h2>
-				<span class="reset" style="display: none;">Current filter: <span class="filter"></span></span> 
-				<a class="reset" href="javascript:histogram.filterAll();dc.redrawAll();" style="display: none;">reset</a>
-			</div>
-		</div>
 		<div id="smallCharts">
 			<div id="boroughRow">
 				<div>
@@ -32,6 +25,20 @@
 					<span class="reset" style="display: none;">Current filter: <span class="filter"></span></span> 
 					<a class="reset" href="javascript:typeRow.filterAll();dc.redrawAll();" style="display: none;">reset</a>
 				</div>
+			</div>
+			<div id="topZipCodes">
+				<div>
+					<h2>Top 5 Zip Codes</h2>
+					<span class="reset" style="display: none;">Current filter: <span class="filter"></span></span> 
+					<a class="reset" href="javascript:topZipCodes.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+				</div>
+			</div>
+		</div>
+		<div id="histogram">
+			<div>
+				<h2>By Month</h2>
+				<span class="reset" style="display: none;">Current filter: <span class="filter"></span></span> 
+				<a class="reset" href="javascript:histogram.filterAll();dc.redrawAll();" style="display: none;">reset</a>
 			</div>
 		</div>
 	</aside>

@@ -38,6 +38,7 @@ var choropleth = dc.geoChoroplethChart("#choropleth");
 var histogram = dc.barChart("#histogram");
 var boroughRow = dc.rowChart("#boroughRow");
 var typeRow = dc.rowChart("#typeRow");
+var topZipCodes = dc.rowChart("#topZipCodes");
 
 d3.csv("data/nyc_rodent_complaints.csv", function(error, rawData) {
 
@@ -154,6 +155,22 @@ d3.csv("data/nyc_rodent_complaints.csv", function(error, rawData) {
         		return -d.value;
         	})
         	;
+
+		typeRow.xAxis().ticks(5);
+
+		topZipCodes.dimension(zipCodes)
+			.group(zipCodeCounts)
+			.data(function(group) {
+				return group.top(5);
+			})
+			.elasticX(true)
+        	.ordering(function (d) {
+        		return -d.value;
+        	})
+        	;
+
+		topZipCodes.xAxis().ticks(5);
+
 
 		var updateChloroplethScale = function(chart, filter) {
 			var domain = [d3.min(choropleth.group().all(), choropleth.colorAccessor()),
