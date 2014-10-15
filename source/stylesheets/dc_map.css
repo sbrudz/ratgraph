@@ -146,6 +146,6 @@ li.key {
 	clear: both;
 }
 
-#boroughRow g.row text {
+.dc-chart g.row text {
 	fill: black;
 }

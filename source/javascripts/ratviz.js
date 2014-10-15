@@ -36,15 +36,13 @@ var path = d3.geo.path()
 
 var choropleth = dc.geoChoroplethChart("#choropleth");
 var histogram = dc.barChart("#histogram");
-var pie = dc.pieChart("#pie");
 var boroughRow = dc.rowChart("#boroughRow");
-
+var typeRow = dc.rowChart("#typeRow");
 
 d3.csv("data/nyc_rodent_complaints.csv", function(error, rawData) {
 
 	rawData.forEach(function(d) {
 		d.created_date = parseDate(d["Created Date"]);
-		d.month = d3.time.month(d.created_date);
 	});
 
 	var data = crossfilter(rawData);
@@ -66,6 +64,11 @@ d3.csv("data/nyc_rodent_complaints.csv", function(error, rawData) {
 		return d["Borough"];
 	});
 	var boroughCounts = borough.group().reduceCount();
+
+	var type = data.dimension(function(d) {
+		return d["Descriptor"];
+	});
+	var typeCounts = type.group().reduceCount();
 
 	// Determine the first and last dates in the data set
 	var monthExtent = d3.extent(rawData, function(d) { return d.created_date; });
@@ -134,22 +137,6 @@ d3.csv("data/nyc_rodent_complaints.csv", function(error, rawData) {
 			.elasticY(true)
 			.renderHorizontalGridLines(true);
 
-
-		pie
-		// .width(pieWidth)
-		// 	.height(pieHeight)
-			.dimension(borough)
-			.group(boroughCounts)
-			.colors(d3.scale.category10())
-			.label(function (d) {
-	            if (pie.hasFilter() && !pie.hasFilter(d.key))
-	                return d.key + " (0%)";
-	            var label = d.key;
-	            if(all.value())
-	                label += " (" + Math.floor(d.value / all.value() * 100) + "%)";
-	            return label;
-	        });
-
         boroughRow.dimension(borough)
         	.group(boroughCounts)
         	.elasticX(true)
@@ -160,13 +147,21 @@ d3.csv("data/nyc_rodent_complaints.csv", function(error, rawData) {
 
 		boroughRow.xAxis().ticks(5);
 
+		typeRow.dimension(type)
+			.group(typeCounts)
+			.elasticX(true)
+        	.ordering(function (d) {
+        		return -d.value;
+        	})
+        	;
 
 		var updateChloroplethScale = function(chart, filter) {
 			var domain = [d3.min(choropleth.group().all(), choropleth.colorAccessor()),
 						  d3.max(choropleth.group().all(), choropleth.colorAccessor())];
 			choropleth.colorDomain(domain);
 		}
-		pie.on('filtered', updateChloroplethScale);
+		boroughRow.on('filtered', updateChloroplethScale);
+		typeRow.on('filtered', updateChloroplethScale);
 		histogram.on('filtered', updateChloroplethScale);
 
 		choropleth.renderlet(function(chart) {
