@@ -1,24 +1,26 @@
+@import "bourbon/bourbon";
+
 html, body {
 	height: 100%;
 }
 
 section {
 	height: 90%;
-	display: flex;
-	justify-content: center;
+	@include display(flex);
+	@include justify-content(center);
 }
 
 #filters {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
+	@include display(flex);
+	@include justify-content(center);
+	@include align-items(center);
+	@include flex-direction(column);
 }
 
 #smallCharts {
-	display: flex;
-	justify-content: stretch;
-	align-items: stretch;
+	@include display(flex);
+	@include justify-content(stretch);
+	@include align-items(stretch);
 }
 
 .filter, .reset {
@@ -31,7 +33,7 @@ section {
 
 @media all and (orientation: landscape) {
 	section {
-		flex-direction: row;
+		@include flex-direction(row);
 	}
 
 	#choropleth {
@@ -58,7 +60,7 @@ section {
 
 @media all and (orientation: portrait) {
 	section {
-		flex-direction: column;
+		@include flex-direction(column);
 	}
 
 	#choropleth {
