@@ -237,16 +237,22 @@ li.key {
 		var zipCodeCounts = zipCodes.group();
 
 		var time = data.dimension(function(d) {
-		    return d.month;
+		    return d.created_date;
 		});
-		var timeCounts = time.group().reduceCount();
+		var timeCounts = time.group(function(d) {
+			return d3.time.month(d);
+		}).reduceCount();
 
 		var borough = data.dimension(function(d) {
 			return d["Borough"];
 		});
 		var boroughCounts = borough.group().reduceCount();
 
-		var timeScale = d3.time.scale().domain([(new Date(2010,12,31)), (new Date(2014,10,01))]);
+		// Determine the first and last dates in the data set
+		var monthExtent = d3.extent(rawData, function(d) { return d.created_date; });
+
+		var timeScale = d3.time.scale().domain([d3.time.month.floor(monthExtent[0]),
+		                             d3.time.month.ceil(monthExtent[1])]);
 
 		d3.json("data/nyc-zip-code.json", function(nycZipJson) {
 
