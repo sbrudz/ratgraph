@@ -149,6 +149,8 @@ d3.csv("data/nyc_rodent_complaints.csv", function(error, rawData) {
         	;
 
 		boroughRow.xAxis().ticks(5);
+		boroughRow.margins().right = 5;
+		boroughRow.margins().left = 5;
 
 		typeRow
 			.width(typeSize.width)
@@ -162,12 +164,18 @@ d3.csv("data/nyc_rodent_complaints.csv", function(error, rawData) {
         	;
 
 		typeRow.xAxis().ticks(5);
+		typeRow.margins().right = 5;
+		typeRow.margins().left = 5;
 
 		topZipCodes
 			.width(topZipCodesSize.width)
 			.height(topZipCodesSize.height)
 			.dimension(zipCodes)
 			.group(zipCodeCounts)
+			.colors(colorScale)
+			.colorAccessor(function(d) {
+				return d.value;
+			})
 			.data(function(group) {
 				return group.top(5);
 			})
@@ -178,6 +186,8 @@ d3.csv("data/nyc_rodent_complaints.csv", function(error, rawData) {
         	;
 
 		topZipCodes.xAxis().ticks(5);
+		topZipCodes.margins().right = 5;
+		topZipCodes.margins().left = 5;
 
 
 		var updateChloroplethScale = function(chart, filter) {
