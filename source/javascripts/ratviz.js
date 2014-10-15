@@ -1,18 +1,18 @@
 var margin = {top: 10, left: 10, bottom: 10, right: 10};
 
-function calculateSvgSize(id, margin) {
+function calculateSvgSize(id, margin, heightRatio) {
 	var width = parseInt(d3.select(id).style('width'))
+	  , height = width * heightRatio
 	  , width = width - margin.left - margin.right
-	  , height = parseInt(d3.select(id).style('height'))
 	  , height = height - margin.top - margin.bottom;
 	return {height: height, width: width};  
 };
 
-var mapSize = calculateSvgSize('#choropleth', margin);
-var histSize = calculateSvgSize('#histogram', margin);
-var boroughSize = calculateSvgSize('#boroughRow', margin);
-var typeSize = calculateSvgSize('#typeRow', margin);
-var topZipCodesSize = calculateSvgSize('#topZipCodes', margin);
+var mapSize = calculateSvgSize('#choropleth', margin, 1.2);
+var histSize = calculateSvgSize('#histogram', margin, .33);
+var boroughSize = calculateSvgSize('#boroughRow', margin, 1.2);
+var typeSize = calculateSvgSize('#typeRow', margin, 1.2);
+var topZipCodesSize = calculateSvgSize('#topZipCodes', margin, 1.2);
 
 var parseDate = d3.time.format("%m/%d/%Y %I:%M:%S %p").parse;
 var formatDate = d3.time.format("%m/%y");
