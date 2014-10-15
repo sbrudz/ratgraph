@@ -1,8 +1,13 @@
 ---
-title: Welcome
+title: Rat Sightings in NYC
 ---
 <section class="content">
 <h1>Visualization of Rat Sightings in NYC</h1>
+
+<figure>
+	<iframe src="dc_map.html" scrolling="no"></iframe>
+	<figcaption>A linked visualization created using <a href="http://dc-js.github.io/dc.js/">dc.js</a>. Clicking on a section of one of the graphs will filter the others. <a href="dc_map.html">[+] View a larger version of this graphic</a></figcaption>
+</figure>
 
 <p>Recently, Michael, our CTO, pointed out this interesting data set of reported rat sightings in NYC.  It has enough dimensions to be interesting but it’s not so huge and complex that it can’t be used as a basic example.  There are some <a href="http://gothamist.com/2013/01/02/have_you_become_complacent_to_the_r.php">existing visualizations</a> of the sightings but they don’t take time into account very well.</p>
 
@@ -31,10 +36,6 @@ There could be other factors, such as fewer people out and about when it’s col
 <p>The addition of two spatial dimensions makes the data presentation problem more complex.  I’ve explored two different methods of visualization:  first, a matrix chloropleth visualization that shows sightings per zip code by year and by month simultaneously and second, an interactive chloropleth that is linked to a time-series histogram.
 </p>
 
-<figure>
-	<iframe src="dc_map.html" scrolling="no"></iframe>
-	<figcaption>A linked visualization created using <a href="http://dc-js.github.io/dc.js/">dc.js</a>. Clicking on a section of one of the graphs will filter the others. <a href="dc_map.html">[+] View a larger version of this graphic</a></figcaption>
-</figure>
 
 <p>
 Include average temperature on graph – min and max lines would be perfect!
@@ -44,4 +45,3 @@ Look at 311 calls per capita to see if certain boroughs are under-represented in
 </p>
 
 <section>
-<%= javascript_include_tag 'histogram' %>
