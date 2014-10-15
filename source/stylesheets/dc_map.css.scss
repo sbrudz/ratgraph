@@ -4,6 +4,19 @@ html, body {
 	height: 100%;
 }
 
+footer {
+	position: relative;
+	width: 100%;
+}
+
+.subtitle {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	text-align: right;
+	font-size: 0.8rem;
+}
+
 section {
 	height: 90%;
 	@include display(flex);

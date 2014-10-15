@@ -4,12 +4,19 @@ title: Rat Sightings in NYC
 <section class="content">
 <h1>Visualization of Rat Sightings in NYC</h1>
 
+<p>
+	Rats! At times, they seem to be everywhere in New York City, scurrying across the subway tracks or into an dark alley.  They carry a variety of infectious bacteria, as a <a href="http://www.nydailynews.com/life-style/health/rats-nyc-carry-variety-infectious-bacteria-study-article-1.1974415">recent study</a> by researchers at Columbia University found.
+	The city of New York was rated the <a href="http://www.prnewswire.com/news-releases/chicago-holds-top-spot-on-rattiest-cities-list-278988971.html">4th rattiest city</a> in the country by Orkin.  
+</p>
+
+<p>
+	The city makes much of its data on reported rat and rodent sightings available to the public. The visualization below uses the data from 311 calls to show how rat sightings vary over time and location.
+</p>
+
 <figure>
 	<iframe src="dc_map.html" scrolling="no"></iframe>
-	<figcaption>A linked visualization created using <a href="http://dc-js.github.io/dc.js/">dc.js</a>. Clicking on a section of one of the graphs will filter the others. <a href="dc_map.html">[+] View a larger version of this graphic</a></figcaption>
+	<figcaption><a href="dc_map.html">[+] View a larger version of this graphic</a></figcaption>
 </figure>
-
-<p>Recently, Michael, our CTO, pointed out this interesting data set of reported rat sightings in NYC.  It has enough dimensions to be interesting but it’s not so huge and complex that it can’t be used as a basic example.  There are some <a href="http://gothamist.com/2013/01/02/have_you_become_complacent_to_the_r.php">existing visualizations</a> of the sightings but they don’t take time into account very well.</p>
 
 <p>Time is particularly relevant because NYC is in the process of piloting <a href="http://www.nytimes.com/2013/03/12/nyregion/as-rats-escape-death-mta-turns-to-sterilization.html">a new rat control program</a> that uses a chemical, ContraPest® from <a href="http://senestech.com/">SenesTech Inc.</a>, to reduce rat fertility.</p>
 
@@ -17,31 +24,6 @@ title: Rat Sightings in NYC
 
 <p>If the pilot portion of the study being conducted in 2014 is successful and NYC rolls out the program on a wider basis, the number of rat sightings over time should go down.</p>
 
-<p>So my first step was to build a histogram of sightings over time.  I haven't yet seen a good simple example of a time series histogram in D3.js, so I took the time to build a well-commented <a href="http://bl.ocks.org/sbrudz/ed6454e3d25640d19a41">gist and d3 bl.ock.</a>.</p>
-
-<figure>
-	<div id="basic-histogram"></div>
-	<figcaption>Reported rat sightings over time.</figcaption>
-</figure>
-
-<aside>[1] <a href="http://animaldiversity.ummz.umich.edu/accounts/Rattus_norvegicus/" title="University of Michigan Animal Diversity Web">University of Michigan Animal Diversity Web</a>.
-There could be other factors, such as fewer people out and about when it’s cold out or maybe people are less likely to call 311 when it’s too cold to take off their gloves.  If there’s interest, I’ll attempt to address those in a future blog post by looking at other data sets.</aside>
-
-<p>You can clearly see some seasonal variation in the data.  The most dominant species of rat in NYC, the brown rat (rattus norvegicus), breeds year-around but mates more frequently in the warmer months of the year [1] so this is a likely explanation for the variation.</p>
-
-<p>Next, I decided to look at how the data varies between boroughs (<a href="http://bl.ocks.org/sbrudz/8ac4f4102f787d0fcea5">d3 bl.ock</a>).</p>
-
-<p>Brooklyn and Manhattan are the winners here followed by the Bronx.  The source data includes finer-grained location information, though, and it would be interesting to see how sightings varied over time in different parts of the city.</p>
-
-<p>The addition of two spatial dimensions makes the data presentation problem more complex.  I’ve explored two different methods of visualization:  first, a matrix chloropleth visualization that shows sightings per zip code by year and by month simultaneously and second, an interactive chloropleth that is linked to a time-series histogram.
-</p>
-
-
-<p>
-Include average temperature on graph – min and max lines would be perfect!
-Include other rat-related data, such as inspection reports, to see if
-
-Look at 311 calls per capita to see if certain boroughs are under-represented in the data set
-</p>
+<p>You can clearly see some seasonal variation in the data.  The most dominant species of rat in NYC, the brown rat (rattus norvegicus), breeds year-around but mates more frequently in <a href="http://animaldiversity.ummz.umich.edu/accounts/Rattus_norvegicus/" title="University of Michigan Animal Diversity Web">the warmer months of the year</a> so this is a likely explanation for the variation.</p>
 
 <section>
