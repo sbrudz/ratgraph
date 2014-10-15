@@ -10,10 +10,10 @@ var histWidth = parseInt(d3.select('#histogram').style('width'))
   , histHeight = parseInt(d3.select('#histogram').style('height'))
   , histHeight = histHeight - margin.top - margin.bottom;
 
-var pieWidth = parseInt(d3.select('#pie').style('width'))
-  , pieWidth = pieWidth - margin.left - margin.right
-  , pieHeight = parseInt(d3.select('#pie').style('height'))
-  , pieHeight = pieHeight - margin.top - margin.bottom;
+// var pieWidth = parseInt(d3.select('#pie').style('width'))
+//   , pieWidth = pieWidth - margin.left - margin.right
+//   , pieHeight = parseInt(d3.select('#pie').style('height'))
+//   , pieHeight = pieHeight - margin.top - margin.bottom;
 
 var parseDate = d3.time.format("%m/%d/%Y %I:%M:%S %p").parse;
 var formatDate = d3.time.format("%m/%y");
@@ -37,6 +37,7 @@ var path = d3.geo.path()
 var choropleth = dc.geoChoroplethChart("#choropleth");
 var histogram = dc.barChart("#histogram");
 var pie = dc.pieChart("#pie");
+var boroughRow = dc.rowChart("#boroughRow");
 
 
 d3.csv("data/nyc_rodent_complaints.csv", function(error, rawData) {
@@ -134,8 +135,9 @@ d3.csv("data/nyc_rodent_complaints.csv", function(error, rawData) {
 			.renderHorizontalGridLines(true);
 
 
-		pie.width(pieWidth)
-			.height(pieHeight)
+		pie
+		// .width(pieWidth)
+		// 	.height(pieHeight)
 			.dimension(borough)
 			.group(boroughCounts)
 			.colors(d3.scale.category10())
@@ -147,6 +149,17 @@ d3.csv("data/nyc_rodent_complaints.csv", function(error, rawData) {
 	                label += " (" + Math.floor(d.value / all.value() * 100) + "%)";
 	            return label;
 	        });
+
+        boroughRow.dimension(borough)
+        	.group(boroughCounts)
+        	.elasticX(true)
+        	.ordering(function (d) {
+        		return -d.value;
+        	})
+        	;
+
+		boroughRow.xAxis().ticks(5);
+
 
 		var updateChloroplethScale = function(chart, filter) {
 			var domain = [d3.min(choropleth.group().all(), choropleth.colorAccessor()),
