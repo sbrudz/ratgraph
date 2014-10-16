@@ -73,8 +73,15 @@ d3.csv("data/nyc_rodent_complaints.csv", function(error, rawData) {
 	// Determine the first and last dates in the data set
 	var monthExtent = d3.extent(rawData, function(d) { return d.created_date; });
 
-	var timeScale = d3.time.scale().domain([d3.time.month.floor(monthExtent[0]),
-	                             d3.time.month.ceil(monthExtent[1])]);
+
+	var timeScale = d3.time.scale()
+		.domain([monthExtent[0], monthExtent[1]])
+		.nice(d3.time.month);
+
+	var shortMonthTickFormat = d3.time.format.multi([
+			["%b", function(d) { return d.getMonth(); }],
+			["%Y", function() { return true; }]
+	]);
 
 	d3.json("data/nyc-zip-code.json", function(nycZipJson) {
 
@@ -136,6 +143,8 @@ d3.csv("data/nyc_rodent_complaints.csv", function(error, rawData) {
 			.xUnits(d3.time.months)
 			.elasticY(true)
 			.renderHorizontalGridLines(true);
+
+		histogram.xAxis().tickFormat(shortMonthTickFormat);
 
         boroughRow
         	.width(boroughSize.width)
@@ -209,7 +218,34 @@ d3.csv("data/nyc_rodent_complaints.csv", function(error, rawData) {
 
 		});
 
-		dc.renderAll();
+		resize();
 	});
 
 });
+
+function resize() {
+	var mapSize = calculateSvgSize('#choropleth', margin, 1.2);
+	choropleth.height(mapSize.height).width(mapSize.width);
+
+	var histSize = calculateSvgSize('#histogram', margin, .33);
+	histogram.height(histSize.height).width(histSize.width);
+	histogram.xAxis().ticks(Math.max(histSize.width/50, 2));
+	histogram.yAxis().ticks(Math.max(histSize.height/50, 2));
+
+	var boroughSize = calculateSvgSize('#boroughRow', margin, 1.2);
+	boroughRow.height(boroughSize.height).width(boroughSize.width);
+	boroughRow.xAxis().ticks(Math.max(boroughSize.width/50, 2));
+
+	var typeSize = calculateSvgSize('#typeRow', margin, 1.2);
+	typeRow.height(typeSize.height).width(typeSize.width);
+	typeRow.xAxis().ticks(Math.max(typeSize.width/50, 2));
+
+	var topZipCodesSize = calculateSvgSize('#topZipCodes', margin, 1.2);
+	topZipCodes.height(topZipCodesSize.height).width(topZipCodesSize.width);
+	topZipCodes.xAxis().ticks(Math.max(topZipCodesSize.width/50, 2));
+
+	dc.renderAll();
+}
+
+d3.select(window).on('resize', resize);
+
