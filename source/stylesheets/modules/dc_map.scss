@@ -1,13 +1,13 @@
-.dc_map footer {
+.full_screen footer {
 	width: 100%;
 	padding: .5rem 0;
 }
 
-.dc_map footer p {
+.full_screen footer p {
 	font-size: .7rem;
 }
 
-.dc_map section {
+.full_screen section {
 	@include display(flex);
 	@include justify-content(center);
 }
@@ -34,7 +34,7 @@
 }
 
 @media all and (orientation: landscape) {
-	.dc_map section {
+	.full_screen section {
 		@include flex-direction(row);
 	}
 
@@ -57,7 +57,7 @@
 }
 
 @media all and (orientation: portrait) {
-	.dc_map section {
+	.full_screen section {
 		@include flex-direction(column);
 	}
 
@@ -78,13 +78,13 @@
 	}
 }
 
-.dc_map h1 {
+.full_screen h1 {
 	font-size: 1.5rem;
 	text-align: center;
 	margin: .5rem 0;
 }
 
-.dc_map h2 {
+.full_screen h2 {
 	font-size: 1rem;
 	display: inline;
 	margin: 2px;
@@ -101,7 +101,7 @@
 	margin: 0px;
 }
 
-.dc_map aside > div {
+.full_screen aside > div {
 	padding: 0px;
 	margin: 0px;	
 }
@@ -129,7 +129,7 @@
 	margin: 0;
 }
 
-.dc_map li.key {
+.full_screen li.key {
 	padding: 0;
 	display: block;
 	flex-grow: 1;
