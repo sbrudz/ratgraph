@@ -1,15 +1,13 @@
-@import "bourbon/bourbon";
-
-footer {
+.dc_map footer {
 	width: 100%;
 	padding: .5rem 0;
 }
 
-footer p {
+.dc_map footer p {
 	font-size: .7rem;
 }
 
-section {
+.dc_map section {
 	@include display(flex);
 	@include justify-content(center);
 }
@@ -36,7 +34,7 @@ section {
 }
 
 @media all and (orientation: landscape) {
-	section {
+	.dc_map section {
 		@include flex-direction(row);
 	}
 
@@ -59,7 +57,7 @@ section {
 }
 
 @media all and (orientation: portrait) {
-	section {
+	.dc_map section {
 		@include flex-direction(column);
 	}
 
@@ -80,13 +78,13 @@ section {
 	}
 }
 
-h1 {
+.dc_map h1 {
 	font-size: 1.5rem;
 	text-align: center;
 	margin: .5rem 0;
 }
 
-h2 {
+.dc_map h2 {
 	font-size: 1rem;
 	display: inline;
 	margin: 2px;
@@ -103,7 +101,7 @@ h2 {
 	margin: 0px;
 }
 
-aside > div {
+.dc_map aside > div {
 	padding: 0px;
 	margin: 0px;	
 }
@@ -131,7 +129,7 @@ aside > div {
 	margin: 0;
 }
 
-li.key {
+.dc_map li.key {
 	padding: 0;
 	display: block;
 	flex-grow: 1;
