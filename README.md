@@ -23,6 +23,6 @@ HTML5 and SASS / CSS are used for content and layout.  It uses [Middleman](http:
 * Setup a nightly batch job to pull in the latest sighting data
 
 ## Credits
-* Thanks for Cyrus Innovation and Occom for supporting work on this project
+* Thanks to Cyrus Innovation and Occom for supporting work on this project
 * Thanks to Jon Roberts for his <a href="https://github.com/jonroberts/d3Mapping">NYC Zip Code Map geoJSON</a>.
 * Thanks to the city of New York for providing their 311 data to the public in an easily accessible format
