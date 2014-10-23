@@ -39,10 +39,10 @@ var boroughRow = dc.rowChart("#boroughRow");
 var typeRow = dc.rowChart("#typeRow");
 var topZipCodes = dc.rowChart("#topZipCodes");
 
-d3.csv("data/nyc_rodent_complaints.csv", function(error, rawData) {
+d3.csv("data/nyc_rodent_complaints_cleaned.csv", function(error, rawData) {
 
 	rawData.forEach(function(d) {
-		d.created_date = parseDate(d["Created Date"]);
+		d.created_date = new Date(+d["Created Date"]);
 	});
 
 	var data = crossfilter(rawData);
