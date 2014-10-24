@@ -77,10 +77,16 @@ function ready(error, rawData, nycZipJson, nycZipDemographics) {
     var zipCodeCounts = zipCodes.group();
 
     var topZipCodesDim = data.dimension(function (d) {
-    	return d["Incident Zip"]
+    	return d["Incident Zip"];
     });
 
     var topZipCodeCounts = topZipCodesDim.group();
+
+    var demographicBubblesDim = data.dimension(function (d) {
+    	return d["Incident Zip"];
+    });
+
+    var demographicBubbleCount = demographicBubblesDim.group();
 
     var time = data.dimension(function (d) {
         return d.created_date;
@@ -254,8 +260,8 @@ function ready(error, rawData, nycZipJson, nycZipDemographics) {
     topZipCodes.margins().left = 5;
 
     demographicBubble
-    	.dimension(zipCodes)
-    	.group(zipCodeCounts)
+    	.dimension(demographicBubblesDim)
+    	.group(demographicBubbleCount)
     	.margins({top: 10, right: 50, bottom: 30, left: 80})
         .radiusValueAccessor(function (d) {
             return d.value;
