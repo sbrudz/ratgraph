@@ -33,6 +33,10 @@
 	width: 33.3%;
 }
 
+#filters > div {
+	width: 100%;
+}
+
 @media all and (orientation: landscape) {
 	.full_screen section {
 		@include flex-direction(row);
