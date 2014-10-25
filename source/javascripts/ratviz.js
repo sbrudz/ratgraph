@@ -51,10 +51,27 @@ var typeRow = dc.rowChart("#typeRow");
 var topZipCodes = dc.rowChart("#topZipCodes");
 var demographicBubble = dc.bubbleChart("#demographicBubble");
 
+function complaintsParser(d) {
+	return {
+		created_date: new Date(+d["Created Date"]),
+		zip_code: d["Incident Zip"],
+		borough: d["Borough"],
+		type: d["Descriptor"]
+	};
+}
+
+function demographicsParser(d) {
+	return {
+		zip_code: d.zip_code,
+		people_per_acre: +d.people_per_acre,
+		median_income: +d.median_income
+	};
+}
+
 queue()
-    .defer(d3.csv, "data/nyc_rodent_complaints_cleaned.csv")
+    .defer(d3.csv, "data/nyc_rodent_complaints_cleaned.csv", complaintsParser)
     .defer(d3.json, "data/nyc-zip-code.json")
-    .defer(d3.csv, "data/nyc-zip-demographics.csv")
+    .defer(d3.csv, "data/nyc-zip-demographics.csv", demographicsParser)
     .await(ready);
 
 function ready(error, rawData, nycZipJson, nycZipDemographics) {
@@ -63,30 +80,77 @@ function ready(error, rawData, nycZipJson, nycZipDemographics) {
         console.warn(error);
     }
 
-    rawData.forEach(function (d) {
-        d.created_date = new Date(+d["Created Date"]);
-    });
-
     var data = crossfilter(rawData),
     	all = data.groupAll();
 
     var zipCodes = data.dimension(function (d) {
-        return d["Incident Zip"];
+        return d.zip_code;
     });
 
     var zipCodeCounts = zipCodes.group();
 
     var topZipCodesDim = data.dimension(function (d) {
-    	return d["Incident Zip"];
+    	return d.zip_code;
     });
 
     var topZipCodeCounts = topZipCodesDim.group();
 
     var demographicBubblesDim = data.dimension(function (d) {
-    	return d["Incident Zip"];
+    	return d.zip_code;
     });
 
-    var demographicBubbleCount = demographicBubblesDim.group();
+    // Create a map so we can quickly loop up demographic info by zip code
+    var zipDemoIndex = {};
+    nycZipDemographics.forEach(function (d) {
+    	zipDemoIndex[d.zip_code] = d;
+    });
+
+	function reduceAdd(p, v) {
+		p.count++;
+
+		if (zipDemoIndex[v.zip_code]) {
+			p.people_per_acre = zipDemoIndex[v.zip_code].people_per_acre;
+			p.median_income = zipDemoIndex[v.zip_code].median_income;
+		} else {
+			p.count = 0;
+		}
+		return p;
+		// var entry = p[v.zip_code];
+		// if (!entry && zipDemoIndex[v.zip_code]) {
+		// 	entry = {
+		// 		count: 0,
+		// 		people_per_acre: zipDemoIndex[v.zip_code].people_per_acre,
+		// 		median_income: zipDemoIndex[v.zip_code].median_income
+		// 	};
+		// 	p[v.zip_code] = entry;
+		// }
+		// if (entry) {
+		// 	entry.count++;
+		// }
+		// return p;
+	}
+
+	function reduceRemove(p, v) {
+		p.count--;
+		if (p.count == 0) {
+			p.people_per_acre = 0;
+			p.median_income = 0;
+		}
+		return p;
+		// var entry = p[v.zip_code];
+		// if (entry) {
+		// 	entry.count--;
+		// 	if (entry.count === 0) {
+		// 		delete p[v.zip_code];
+		// 	}
+		// }
+		// return p;
+	}
+
+	function reduceInitial() {
+		return {count: 0};
+	}
+    var demographicBubbleCount = demographicBubblesDim.group().reduce(reduceAdd, reduceRemove, reduceInitial);
 
     var time = data.dimension(function (d) {
         return d.created_date;
@@ -96,26 +160,20 @@ function ready(error, rawData, nycZipJson, nycZipDemographics) {
     }).reduceCount();
 
     var borough = data.dimension(function (d) {
-        return d["Borough"];
+        return d.borough;
     });
     var boroughCounts = borough.group().reduceCount();
 
     var type = data.dimension(function (d) {
-        return d["Descriptor"];
+        return d.type;
     });
     var typeCounts = type.group().reduceCount();
-
-    // Create a map so we can quickly loop up demographic info by zip code
-    var zipDemoIndex = {};
-    nycZipDemographics.forEach(function (d) {
-    	zipDemoIndex[d.zip_code] = d;
-    });
 
     var peopleExtent = d3.extent(nycZipDemographics, function (d) {
 	    	return d.people_per_acre;
 	    });
 	// var peopleScale = d3.scale.linear().domain([peopleExtent[0],peopleExtent[1]]);
-	var peopleScale = d3.scale.linear().domain([0, 210]);
+	var peopleScale = d3.scale.linear().domain([0, 500]);
 
 
     var incomeExtent = d3.extent(nycZipDemographics, function (d) {
@@ -264,31 +322,41 @@ function ready(error, rawData, nycZipJson, nycZipDemographics) {
     	.group(demographicBubbleCount)
     	.margins({top: 10, right: 50, bottom: 30, left: 80})
         .radiusValueAccessor(function (d) {
-            return d.value;
+            return d.value.count;
         })
-        .elasticRadius(true)
+        .elasticRadius(false)
         .keyAccessor(function (d) {
-        	if (!zipDemoIndex[d.key]) {
-        		console.log("Missing zip: " + d.key);
-        		return 0;
-        	}
-            return zipDemoIndex[d.key].people_per_acre;
+            return d.value.people_per_acre;
         })
         .valueAccessor(function (d) {
-        	if (!zipDemoIndex[d.key]) {
-        		return 0;
-        	}
-            return zipDemoIndex[d.key].median_income;
+            return d.value.median_income;
         })
         .colors(colorScale)
         .colorAccessor(function (d) {
-            return d.value;
+            return d.value.count;
         })
         .x(peopleScale)
-        //.elasticX(true)
+        .elasticX(true)
         .y(incomeScale)
-        //.elasticY(true)
-        .maxBubbleRelativeSize(0.1)
+        .elasticY(true)
+        .maxBubbleRelativeSize(0.05)
+        .yAxisPadding('10%')
+        .xAxisPadding('10%')
+        .renderHorizontalGridLines(true)
+        .renderVerticalGridLines(true)
+        .xAxisLabel('Population Density (people per acre)')
+        .yAxisLabel('Median Income (in 2011 dollars)')
+        .label(function (p) {
+            return p.key;
+        })
+        .renderTitle(true) // (optional) whether chart should render titles, :default = false
+        .title(function (p) {
+            return [p.key,
+            	   "Rodent Complaints: " + p.value.count,
+                   "Pop. Density: " + p.value.people_per_acre,
+                   "Median Income: $" + p.value.median_income]
+                   .join("\n");
+        })
         .r(d3.scale.linear().domain([0, 2000]));
 
 
@@ -324,15 +392,15 @@ function resize() {
     histogram.xAxis().ticks(Math.max(histSize.width / 50, 2));
     histogram.yAxis().ticks(Math.max(histSize.height / 50, 2));
 
-    var boroughSize = calculateSvgSize('#boroughRow', margin, 1.2);
+    var boroughSize = calculateSvgSize('#boroughRow', margin, 1);
     boroughRow.height(boroughSize.height).width(boroughSize.width);
     boroughRow.xAxis().ticks(Math.max(boroughSize.width / 50, 2));
 
-    var typeSize = calculateSvgSize('#typeRow', margin, 1.2);
+    var typeSize = calculateSvgSize('#typeRow', margin, 1);
     typeRow.height(typeSize.height).width(typeSize.width);
     typeRow.xAxis().ticks(Math.max(typeSize.width / 50, 2));
 
-    var topZipCodesSize = calculateSvgSize('#topZipCodes', margin, 1.2);
+    var topZipCodesSize = calculateSvgSize('#topZipCodes', margin, 1);
     topZipCodes.height(topZipCodesSize.height).width(topZipCodesSize.width);
     topZipCodes.xAxis().ticks(Math.max(topZipCodesSize.width / 50, 2));
 
