@@ -115,19 +115,6 @@ function ready(error, rawData, nycZipJson, nycZipDemographics) {
 			p.count = 0;
 		}
 		return p;
-		// var entry = p[v.zip_code];
-		// if (!entry && zipDemoIndex[v.zip_code]) {
-		// 	entry = {
-		// 		count: 0,
-		// 		people_per_acre: zipDemoIndex[v.zip_code].people_per_acre,
-		// 		median_income: zipDemoIndex[v.zip_code].median_income
-		// 	};
-		// 	p[v.zip_code] = entry;
-		// }
-		// if (entry) {
-		// 	entry.count++;
-		// }
-		// return p;
 	}
 
 	function reduceRemove(p, v) {
@@ -137,19 +124,12 @@ function ready(error, rawData, nycZipJson, nycZipDemographics) {
 			p.median_income = 0;
 		}
 		return p;
-		// var entry = p[v.zip_code];
-		// if (entry) {
-		// 	entry.count--;
-		// 	if (entry.count === 0) {
-		// 		delete p[v.zip_code];
-		// 	}
-		// }
-		// return p;
 	}
 
 	function reduceInitial() {
 		return {count: 0};
 	}
+
     var demographicBubbleCount = demographicBubblesDim.group().reduce(reduceAdd, reduceRemove, reduceInitial);
 
     var time = data.dimension(function (d) {
@@ -172,22 +152,19 @@ function ready(error, rawData, nycZipJson, nycZipDemographics) {
     var peopleExtent = d3.extent(nycZipDemographics, function (d) {
 	    	return d.people_per_acre;
 	    });
-	// var peopleScale = d3.scale.linear().domain([peopleExtent[0],peopleExtent[1]]);
-	var peopleScale = d3.scale.linear().domain([0, 500]);
+	var peopleScale = d3.scale.linear().domain([peopleExtent[0],peopleExtent[1]]);
 
 
     var incomeExtent = d3.extent(nycZipDemographics, function (d) {
 	    	return d.median_income;
 	    });
-	// var incomeScale = d3.scale.linear().domain([incomeExtent[0],incomeExtent[1]]);
-	var incomeScale = d3.scale.linear().domain([0, 250000]);
+	var incomeScale = d3.scale.linear().domain([incomeExtent[0],incomeExtent[1]]);
 
 
     // Determine the first and last dates in the data set
     var monthExtent = d3.extent(rawData, function (d) {
         return d.created_date;
     });
-
 
     var timeScale = d3.time.scale()
         .domain([monthExtent[0], monthExtent[1]])
@@ -345,7 +322,7 @@ function ready(error, rawData, nycZipJson, nycZipDemographics) {
         .renderHorizontalGridLines(true)
         .renderVerticalGridLines(true)
         .xAxisLabel('Population Density (people per acre)')
-        .yAxisLabel('Median Income (in 2011 dollars)')
+        .yAxisLabel('Median Income (in 2012 dollars)')
         .label(function (p) {
             return p.key;
         })
