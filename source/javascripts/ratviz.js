@@ -71,7 +71,7 @@ function demographicsParser(d) {
 queue()
     .defer(d3.csv, "data/nyc_rodent_complaints_cleaned.csv", complaintsParser)
     .defer(d3.json, "data/nyc-zip-code.json")
-    .defer(d3.csv, "data/nyc-zip-demographics.csv", demographicsParser)
+    .defer(d3.csv, "data/nyc_zip_demographics.csv", demographicsParser)
     .await(ready);
 
 function ready(error, rawData, nycZipJson, nycZipDemographics) {
