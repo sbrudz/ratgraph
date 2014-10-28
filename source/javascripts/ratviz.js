@@ -28,7 +28,9 @@ var demographicBubbleSize = calculateSvgSize('#demographicBubble', margin, 1.2);
 var parseDate = d3.time.format("%m/%d/%Y %I:%M:%S %p").parse;
 var formatDate = d3.time.format("%m/%y");
 var formatCount = d3.format(",.0f");
-
+var formatIncomeAxis = d3.format("$s");
+var incomeFormat = d3.format("$.3s");
+var formatDensity = d3.format("d");
 
 // Thanks to http://colorbrewer2.org/
 var colorScale = d3.scale.quantize().range(['rgb(255,255,229)', 'rgb(247,252,185)', 'rgb(217,240,163)', 'rgb(173,221,142)', 'rgb(120,198,121)', 'rgb(65,171,93)', 'rgb(35,132,67)', 'rgb(0,104,55)', 'rgb(0,69,41)']);
@@ -208,7 +210,7 @@ function ready(error, rawData, nycZipJson, nycZipDemographics) {
         .projection(projection)
         .title(function (d) {
         	var name = zipDemoIndex[d.key] ? zipDemoIndex[d.key].name : d.key;
-            return "Zip Code: " + name + "\nNumber of Sightings: " + d.value;
+            return "Zip Code: " + name + "\n# Complaints: " + formatCount(d.value);
         });
 
     choropleth.calculateColorDomain();
@@ -253,6 +255,9 @@ function ready(error, rawData, nycZipJson, nycZipDemographics) {
         .height(boroughSize.height)
         .dimension(borough)
         .group(boroughCounts)
+        .title(function (d) {
+            return "# Complaints: " + formatCount(d.value);
+        })
         .elasticX(true)
         .ordering(function (d) {
             return -d.value;
@@ -268,6 +273,9 @@ function ready(error, rawData, nycZipJson, nycZipDemographics) {
         .dimension(type)
         .group(typeCounts)
         .elasticX(true)
+        .title(function (d) {
+            return "# Complaints: " + formatCount(d.value);
+        })
         .ordering(function (d) {
             return -d.value;
         });
@@ -290,6 +298,9 @@ function ready(error, rawData, nycZipJson, nycZipDemographics) {
         })
         .label(function(d) { 
         	return zipDemoIndex[d.key] ? zipDemoIndex[d.key].name : d.key;
+        })
+        .title(function (d) {
+            return "# Complaints: " + formatCount(d.value);
         })
         .elasticX(true)
         .ordering(function (d) {
@@ -328,19 +339,22 @@ function ready(error, rawData, nycZipJson, nycZipDemographics) {
         .renderHorizontalGridLines(true)
         .renderVerticalGridLines(true)
         .xAxisLabel('Population Density (people per acre)')
-        .yAxisLabel('Median Income (in $2012)')
+        .yAxisLabel('Median Household Income')
         .label(function (p) {
             return p.key;
         })
         .renderTitle(true) // (optional) whether chart should render titles, :default = false
         .title(function (p) {
             return ["Zip Code:" + (zipDemoIndex[p.key] ? zipDemoIndex[p.key].name : p.key),
-            	   "Rodent Complaints: " + p.value.count,
-                   "Pop. Density: " + p.value.people_per_acre,
-                   "Median Income: $" + p.value.median_income]
+            	   "# Complaints: " + formatCount(p.value.count),
+                   "Pop. Density: " + formatCount(p.value.people_per_acre) + " people per acre",
+                   "Median Income: " + incomeFormat(p.value.median_income)]
                    .join("\n");
         })
-        .r(d3.scale.linear().domain([0, 2000]));
+        .r(d3.scale.linear().domain([0, 2000]))
+        .yAxis().tickFormat(function (v) {
+            return formatIncomeAxis(v);
+        });
 
 
     var updateChloroplethScale = function (chart, filter) {
