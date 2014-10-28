@@ -19,18 +19,12 @@ function calculateSvgSize(id, margin, heightRatio) {
 }
 
 var mapSize = calculateSvgSize('#choropleth', margin, 1.2);
-var histSize = calculateSvgSize('#histogram', margin, 0.33);
-var boroughSize = calculateSvgSize('#boroughRow', margin, 1);
-var typeSize = calculateSvgSize('#typeRow', margin, 1);
-var topZipCodesSize = calculateSvgSize('#topZipCodes', margin, 1);
-var demographicBubbleSize = calculateSvgSize('#demographicBubble', margin, 1.2);
 
 var parseDate = d3.time.format("%m/%d/%Y %I:%M:%S %p").parse;
 var formatDate = d3.time.format("%m/%y");
 var formatCount = d3.format(",.0f");
 var formatIncomeAxis = d3.format("$s");
 var incomeFormat = d3.format("$.3s");
-var formatDensity = d3.format("d");
 
 // Thanks to http://colorbrewer2.org/
 var colorScale = d3.scale.quantize().range(['rgb(255,255,229)', 'rgb(247,252,185)', 'rgb(217,240,163)', 'rgb(173,221,142)', 'rgb(120,198,121)', 'rgb(65,171,93)', 'rgb(35,132,67)', 'rgb(0,104,55)', 'rgb(0,69,41)']);
@@ -232,9 +226,7 @@ function ready(error, rawData, nycZipJson, nycZipDemographics) {
             return formatCount(r[0]);
         });
 
-    histogram.width(histSize.width)
-        .height(histSize.height)
-        .margins({
+    histogram.margins({
             top: 10,
             right: 10,
             bottom: 20,
@@ -250,10 +242,7 @@ function ready(error, rawData, nycZipJson, nycZipDemographics) {
 
     histogram.xAxis().tickFormat(shortMonthTickFormat);
 
-    boroughRow
-        .width(boroughSize.width)
-        .height(boroughSize.height)
-        .dimension(borough)
+    boroughRow.dimension(borough)
         .group(boroughCounts)
         .title(function (d) {
             return "# Complaints: " + formatCount(d.value);
@@ -267,10 +256,7 @@ function ready(error, rawData, nycZipJson, nycZipDemographics) {
     boroughRow.margins().right = 5;
     boroughRow.margins().left = 5;
 
-    typeRow
-        .width(typeSize.width)
-        .height(typeSize.height)
-        .dimension(type)
+    typeRow.dimension(type)
         .group(typeCounts)
         .elasticX(true)
         .title(function (d) {
@@ -284,10 +270,7 @@ function ready(error, rawData, nycZipJson, nycZipDemographics) {
     typeRow.margins().right = 5;
     typeRow.margins().left = 5;
 
-    topZipCodes
-        .width(topZipCodesSize.width)
-        .height(topZipCodesSize.height)
-        .dimension(topZipCodesDim)
+    topZipCodes.dimension(topZipCodesDim)
         .group(topZipCodeCounts)
         .colors(colorScale)
         .colorAccessor(function (d) {
