@@ -128,7 +128,11 @@ function ready(error, rawData, nycZipJson, nycZipDemographics) {
 		return {count: 0};
 	}
 
-    var demographicBubbleCount = demographicBubblesDim.group().reduce(reduceAdd, reduceRemove, reduceInitial);
+	function orderValue(p) {
+		return p.count;
+	}
+
+    var demographicBubbleCount = demographicBubblesDim.group().reduce(reduceAdd, reduceRemove, reduceInitial).order(orderValue);
 
     var time = data.dimension(function (d) {
         return d.created_date;
@@ -297,6 +301,13 @@ function ready(error, rawData, nycZipJson, nycZipDemographics) {
     demographicBubble
     	.dimension(demographicBubblesDim)
     	.group(demographicBubbleCount)
+        .data(function (group) {
+        	var topToUse = d3.select("#topSelect").node().value;
+        	if (topToUse === "all")
+        		return group.all();
+        	else
+	            return group.top(topToUse);
+        })
     	.margins({top: 10, right: 10, bottom: 30, left: 50})
         .radiusValueAccessor(function (d) {
             return d.value.count;
@@ -339,6 +350,10 @@ function ready(error, rawData, nycZipJson, nycZipDemographics) {
             return formatIncomeAxis(v);
         });
 
+	var changeTopZipCodeSelection = function () {
+		demographicBubble.redraw();
+	};
+    d3.select("#topSelect").on("change", changeTopZipCodeSelection);
 
     var updateChloroplethScale = function (chart, filter) {
         var domain = [d3.min(choropleth.group().all(), choropleth.colorAccessor()),
