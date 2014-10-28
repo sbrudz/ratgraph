@@ -23,6 +23,7 @@ var mapSize = calculateSvgSize('#choropleth', margin, 1.2);
 var parseDate = d3.time.format("%m/%d/%Y %I:%M:%S %p").parse;
 var formatDate = d3.time.format("%m/%y");
 var formatCount = d3.format(",.0f");
+var formatCountAxis = d3.format("s");
 var formatIncomeAxis = d3.format("$s");
 var incomeFormat = d3.format("$.3s");
 
@@ -242,12 +243,16 @@ function ready(error, rawData, nycZipJson, nycZipDemographics) {
         .round(d3.time.month.round)
         .xUnits(d3.time.months)
         .elasticY(true)
+        .yAxisLabel('# Complaints')
         .renderHorizontalGridLines(true);
 
     histogram.xAxis().tickFormat(shortMonthTickFormat);
 
     boroughRow.dimension(borough)
         .group(boroughCounts)
+        .colors(function() {
+        	return "rgb(107, 174, 214)";
+        })
         .title(function (d) {
             return "# Complaints: " + formatCount(d.value);
         })
@@ -256,12 +261,17 @@ function ready(error, rawData, nycZipJson, nycZipDemographics) {
             return -d.value;
         });
 
-    boroughRow.xAxis().ticks(5);
+    boroughRow.xAxis().ticks(5).tickFormat(function(v) {
+    	return formatCountAxis(v);
+    });
     boroughRow.margins().right = 5;
     boroughRow.margins().left = 5;
 
     typeRow.dimension(type)
         .group(typeCounts)
+        .colors(function() {
+        	return "rgb(107, 174, 214)";
+        })
         .elasticX(true)
         .title(function (d) {
             return "# Complaints: " + formatCount(d.value);
@@ -270,7 +280,9 @@ function ready(error, rawData, nycZipJson, nycZipDemographics) {
             return -d.value;
         });
 
-    typeRow.xAxis().ticks(5);
+    typeRow.xAxis().ticks(5).tickFormat(function(v) {
+    	return formatCountAxis(v);
+    });
     typeRow.margins().right = 5;
     typeRow.margins().left = 5;
 
@@ -294,7 +306,9 @@ function ready(error, rawData, nycZipJson, nycZipDemographics) {
             return -d.value;
         });
 
-    topZipCodes.xAxis().ticks(5);
+    topZipCodes.xAxis().ticks(5).tickFormat(function(v) {
+    	return formatCountAxis(v);
+    });
     topZipCodes.margins().right = 5;
     topZipCodes.margins().left = 5;
 
