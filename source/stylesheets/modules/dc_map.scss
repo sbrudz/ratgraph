@@ -1,13 +1,21 @@
-.full_screen footer {
+.interactive footer {
 	width: 100%;
 	padding: .5rem 0;
+	position: relative;
 }
 
-.full_screen footer p {
+.interactive footer p {
 	font-size: .7rem;
+	padding-left: 10rem;
 }
 
-.full_screen section {
+.interactive footer .logo {
+	position: absolute;
+	bottom: 2rem;
+	left: 2rem;
+}
+
+.interactive section {
 	@include display(flex);
 	@include justify-content(center);
 }
@@ -38,7 +46,7 @@
 }
 
 @media all and (orientation: landscape) {
-	.full_screen section {
+	.interactive section {
 		@include flex-direction(row);
 	}
 
@@ -61,7 +69,7 @@
 }
 
 @media all and (orientation: portrait) {
-	.full_screen section {
+	.interactive section {
 		@include flex-direction(column);
 	}
 
@@ -82,13 +90,13 @@
 	}
 }
 
-.full_screen h1 {
+.interactive h1 {
 	font-size: 1.5rem;
 	text-align: center;
 	margin: .5rem 0;
 }
 
-.full_screen h2 {
+.interactive h2 {
 	font-size: 1rem;
 	display: inline;
 	margin: 2px;
@@ -105,7 +113,7 @@
 	margin: 0px;
 }
 
-.full_screen aside > div {
+.interactive aside > div {
 	padding: 0px;
 	margin: 0px;	
 }
@@ -133,7 +141,7 @@
 	margin: 0;
 }
 
-.full_screen li.key {
+.interactive li.key {
 	padding: 0;
 	display: block;
 	flex-grow: 1;
@@ -157,4 +165,10 @@
 
 .dc-chart .y-axis-label, .dc-chart .x-axis-label, #legend {
 	font-size: 0.8rem;
+	font-family: "Times New Roman", serif;
+}
+
+.dc-chart .axis text {
+	font-size: 0.7rem;
+	font-family: "Times New Roman", serif;
 }
