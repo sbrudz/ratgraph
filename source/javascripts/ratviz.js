@@ -27,7 +27,7 @@ var formatIncomeAxis = d3.format("$s");
 var incomeFormat = d3.format("$.3s");
 
 // Thanks to http://colorbrewer2.org/
-var colorScale = d3.scale.quantize().range(['rgb(255,255,229)', 'rgb(247,252,185)', 'rgb(217,240,163)', 'rgb(173,221,142)', 'rgb(120,198,121)', 'rgb(65,171,93)', 'rgb(35,132,67)', 'rgb(0,104,55)', 'rgb(0,69,41)']);
+var colorScale = d3.scale.quantize().range(['rgb(255,255,204)','rgb(194,230,153)','rgb(120,198,121)','rgb(49,163,84)','rgb(0,104,55)']);
 
 // Figure out scale and translate for geo projection
 // Thanks to http://stackoverflow.com/questions/14492284/center-a-map-in-d3-given-a-geojson-object
