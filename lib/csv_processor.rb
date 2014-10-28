@@ -22,12 +22,13 @@ CSV.open('../source/data/nyc_rodent_complaints.csv', headers:true) do |complaint
 		complaints.each do |row|
 			created = DateTime.strptime(row['Created Date'], '%m/%d/%Y %I:%M:%S %p')
 			utc_created = created.to_time.to_i * 1000
-			lookup = index[row['Incident Zip']]
 
 			# Fix for central park miscategorization
 			if row['Unique Key'] == '28778395'
-				lookup = index['00083']
+				row['Incident Zip'] = '00083'
 			end
+
+			lookup = index[row['Incident Zip']]
 
 			if row['Descriptor'] == 'Rodent Bite - PCS Only'
 				next
