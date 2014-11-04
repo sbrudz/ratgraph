@@ -1,4 +1,4 @@
-//= require "core"
+//= require "_core"
 
 ratgraph.histogram = function (id, dimension, group) {
 	var _id = id;

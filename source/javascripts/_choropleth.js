@@ -1,4 +1,4 @@
-//= require "core"
+//= require "_core"
 
 ratgraph.choropleth = function (id, dimension, group, colorScale, geoJson) {
 	var _id = id;

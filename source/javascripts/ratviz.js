@@ -1,6 +1,6 @@
-//= require "choropleth"
-//= require "histogram"
-//= require "bubble"
+//= require "_choropleth"
+//= require "_histogram"
+//= require "_bubble"
 
 "use strict";
 

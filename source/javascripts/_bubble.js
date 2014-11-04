@@ -1,4 +1,4 @@
-//= require "core"
+//= require "_core"
 
 ratgraph.bubble = function (id, dimension, group, demographics) {
 	var _id = id;
