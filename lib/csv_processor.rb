@@ -8,20 +8,39 @@ demographics.each do |row|
 end
 
 errors = CSV.open('../source/data/error_log.csv', 'w')
+bad_dates = CSV.open('../source/data/bad_dates_log.csv', 'w')
 
 CSV.open('../source/data/nyc_rodent_complaints.csv', headers:true) do |complaint|
 
 	complaints = complaint.each
 	complaints.next
 	errors << complaint.headers
+	bad_dates << complaint.headers
 
 	missing_zips = Hash.new(0)
+	rows_w_bad_created_dates = 0
 
 	CSV.open('../source/data/nyc_rodent_complaints_cleaned.csv', 'w') do |cleaned|
 		cleaned << ['Created Date','Descriptor','Incident Zip','Borough','Latitude','Longitude']
 		complaints.each do |row|
 			created = DateTime.strptime(row['Created Date'], '%m/%d/%Y %I:%M:%S %p')
-			utc_created = created.to_time.to_i * 1000
+
+			if row['Closed Date'] != nil then
+				closed = DateTime.strptime(row['Closed Date'], '%m/%d/%Y %I:%M:%S %p')
+				earliest_date = [created, closed].min
+				if closed < created then
+					rows_w_bad_created_dates = rows_w_bad_created_dates+1
+					bad_dates << row
+				end
+			else
+				earliest_date = created
+			end
+
+			if earliest_date < DateTime.new(2010,1,1) then
+				next
+			end
+
+			utc_created = earliest_date.to_time.to_i * 1000
 
 			# Fix for central park miscategorization
 			if row['Unique Key'] == '28778395'
@@ -52,5 +71,7 @@ CSV.open('../source/data/nyc_rodent_complaints.csv', headers:true) do |complaint
 	missing_zips.each do |key, value|
 		puts key.to_s + "\t" + value.to_s
 	end
+
+	puts "Rows with bad created dates: " + rows_w_bad_created_dates.to_s
 
 end
