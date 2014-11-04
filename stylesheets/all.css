@@ -1,0 +1,635 @@
+/* line 3, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_base.scss */
+html, body {
+  font-size: 16px;
+  font-family: "Times New Roman", serif; }
+
+/* line 8, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_base.scss */
+section.content {
+  width: 800px;
+  margin: auto; }
+
+@media (max-width: 900px) {
+  /* line 14, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_base.scss */
+  html, body {
+    font-size: 14px; }
+
+  /* line 15, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_base.scss */
+  section.content {
+    width: 90%; } }
+@media (max-width: 400px) {
+  /* line 20, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_base.scss */
+  html, body {
+    font-size: 12px; } }
+/* line 23, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_base.scss */
+p {
+  text-align: justify; }
+
+/* line 27, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_base.scss */
+.graph-img img {
+  width: 100%; }
+
+/* line 31, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_base.scss */
+.graph-img span {
+  text-align: center;
+  display: block; }
+
+/* line 40, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_base.scss */
+footer p {
+  margin: 0;
+  padding-right: 10px;
+  text-align: right; }
+
+/*! normalize.css v2.0.1 | MIT License | git.io/normalize */
+/* ==========================================================================
+   HTML5 display definitions
+   ========================================================================== */
+/*
+ * Corrects `block` display not defined in IE 8/9.
+ */
+/* line 12, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_normalize.scss */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section,
+summary {
+  display: block; }
+
+/*
+ * Corrects `inline-block` display not defined in IE 8/9.
+ */
+/* line 30, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_normalize.scss */
+audio,
+canvas,
+video {
+  display: inline-block; }
+
+/*
+ * Prevents modern browsers from displaying `audio` without controls.
+ * Remove excess height in iOS 5 devices.
+ */
+/* line 41, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_normalize.scss */
+audio:not([controls]) {
+  display: none;
+  height: 0; }
+
+/*
+ * Addresses styling for `hidden` attribute not present in IE 8/9.
+ */
+/* line 50, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_normalize.scss */
+[hidden] {
+  display: none; }
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+/*
+ * 1. Sets default font family to sans-serif.
+ * 2. Prevents iOS text size adjust after orientation change, without disabling
+ *    user zoom.
+ */
+/* line 64, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_normalize.scss */
+html {
+  font-family: sans-serif;
+  /* 1 */
+  -webkit-text-size-adjust: 100%;
+  /* 2 */
+  -ms-text-size-adjust: 100%;
+  /* 2 */ }
+
+/*
+ * Removes default margin.
+ */
+/* line 74, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_normalize.scss */
+body {
+  margin: 0; }
+
+/* ==========================================================================
+   Links
+   ========================================================================== */
+/*
+ * Addresses `outline` inconsistency between Chrome and other browsers.
+ */
+/* line 86, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_normalize.scss */
+a:focus {
+  outline: thin dotted; }
+
+/*
+ * Improves readability when focused and also mouse hovered in all browsers.
+ */
+/* line 94, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_normalize.scss */
+a:active,
+a:hover {
+  outline: 0; }
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+/*
+ * Addresses `h1` font sizes within `section` and `article` in Firefox 4+,
+ * Safari 5, and Chrome.
+ */
+/* line 108, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_normalize.scss */
+h1 {
+  font-size: 2em; }
+
+/*
+ * Addresses styling not present in IE 8/9, Safari 5, and Chrome.
+ */
+/* line 116, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_normalize.scss */
+abbr[title] {
+  border-bottom: 1px dotted; }
+
+/*
+ * Addresses style set to `bolder` in Firefox 4+, Safari 5, and Chrome.
+ */
+/* line 124, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_normalize.scss */
+b,
+strong {
+  font-weight: bold; }
+
+/*
+ * Addresses styling not present in Safari 5 and Chrome.
+ */
+/* line 133, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_normalize.scss */
+dfn {
+  font-style: italic; }
+
+/*
+ * Addresses styling not present in IE 8/9.
+ */
+/* line 141, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_normalize.scss */
+mark {
+  background: #ff0;
+  color: #000; }
+
+/*
+ * Corrects font family set oddly in Safari 5 and Chrome.
+ */
+/* line 151, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_normalize.scss */
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, serif;
+  font-size: 1em; }
+
+/*
+ * Improves readability of pre-formatted text in all browsers.
+ */
+/* line 163, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_normalize.scss */
+pre {
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word; }
+
+/*
+ * Sets consistent quote types.
+ */
+/* line 173, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_normalize.scss */
+q {
+  quotes: "\201C" "\201D" "\2018" "\2019"; }
+
+/*
+ * Addresses inconsistent and variable font size in all browsers.
+ */
+/* line 181, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_normalize.scss */
+small {
+  font-size: 80%; }
+
+/*
+ * Prevents `sub` and `sup` affecting `line-height` in all browsers.
+ */
+/* line 189, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_normalize.scss */
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline; }
+
+/* line 197, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_normalize.scss */
+sup {
+  top: -0.5em; }
+
+/* line 201, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_normalize.scss */
+sub {
+  bottom: -0.25em; }
+
+/* ==========================================================================
+   Embedded content
+   ========================================================================== */
+/*
+ * Removes border when inside `a` element in IE 8/9.
+ */
+/* line 213, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_normalize.scss */
+img {
+  border: 0; }
+
+/*
+ * Corrects overflow displayed oddly in IE 9.
+ */
+/* line 221, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_normalize.scss */
+svg:not(:root) {
+  overflow: hidden; }
+
+/* ==========================================================================
+   Figures
+   ========================================================================== */
+/*
+ * Addresses margin not present in IE 8/9 and Safari 5.
+ */
+/* line 233, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_normalize.scss */
+figure {
+  margin: 0; }
+
+/* ==========================================================================
+   Forms
+   ========================================================================== */
+/*
+ * Define consistent border, margin, and padding.
+ */
+/* line 245, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_normalize.scss */
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em; }
+
+/*
+ * 1. Corrects color not being inherited in IE 8/9.
+ * 2. Remove padding so people aren't caught out if they zero out fieldsets.
+ */
+/* line 256, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_normalize.scss */
+legend {
+  border: 0;
+  /* 1 */
+  padding: 0;
+  /* 2 */ }
+
+/*
+ * 1. Corrects font family not being inherited in all browsers.
+ * 2. Corrects font size not being inherited in all browsers.
+ * 3. Addresses margins set differently in Firefox 4+, Safari 5, and Chrome
+ */
+/* line 267, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_normalize.scss */
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  /* 1 */
+  font-size: 100%;
+  /* 2 */
+  margin: 0;
+  /* 3 */ }
+
+/*
+ * Addresses Firefox 4+ setting `line-height` on `input` using `!important` in
+ * the UA stylesheet.
+ */
+/* line 281, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_normalize.scss */
+button,
+input {
+  line-height: normal; }
+
+/*
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *    and `video` controls.
+ * 2. Corrects inability to style clickable `input` types in iOS.
+ * 3. Improves usability and consistency of cursor style between image-type
+ *    `input` and others.
+ */
+/* line 294, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_normalize.scss */
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  /* 2 */
+  cursor: pointer;
+  /* 3 */ }
+
+/*
+ * Re-set default cursor for disabled elements.
+ */
+/* line 306, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_normalize.scss */
+button[disabled],
+input[disabled] {
+  cursor: default; }
+
+/*
+ * 1. Addresses box sizing set to `content-box` in IE 8/9.
+ * 2. Removes excess padding in IE 8/9.
+ */
+/* line 316, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_normalize.scss */
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  /* 1 */
+  padding: 0;
+  /* 2 */ }
+
+/*
+ * 1. Addresses `appearance` set to `searchfield` in Safari 5 and Chrome.
+ * 2. Addresses `box-sizing` set to `border-box` in Safari 5 and Chrome
+ *    (include `-moz` to future-proof).
+ */
+/* line 328, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_normalize.scss */
+input[type="search"] {
+  -webkit-appearance: textfield;
+  /* 1 */
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  /* 2 */
+  box-sizing: content-box; }
+
+/*
+ * Removes inner padding and search cancel button in Safari 5 and Chrome
+ * on OS X.
+ */
+/* line 340, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_normalize.scss */
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none; }
+
+/*
+ * Removes inner padding and border in Firefox 4+.
+ */
+/* line 349, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_normalize.scss */
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0; }
+
+/*
+ * 1. Removes default vertical scrollbar in IE 8/9.
+ * 2. Improves readability and alignment in all browsers.
+ */
+/* line 360, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_normalize.scss */
+textarea {
+  overflow: auto;
+  /* 1 */
+  vertical-align: top;
+  /* 2 */ }
+
+/* ==========================================================================
+   Tables
+   ========================================================================== */
+/*
+ * Remove most spacing between table cells.
+ */
+/* line 373, /Users/cyrus0012/proj/ratgraph/source/stylesheets/base/_normalize.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/* line 1, /Users/cyrus0012/proj/ratgraph/source/stylesheets/modules/_dc_map.scss */
+.interactive footer {
+  width: 100%;
+  padding: .5rem 0;
+  position: relative; }
+
+/* line 7, /Users/cyrus0012/proj/ratgraph/source/stylesheets/modules/_dc_map.scss */
+.interactive footer p {
+  font-size: .7rem;
+  padding-left: 10rem; }
+
+/* line 12, /Users/cyrus0012/proj/ratgraph/source/stylesheets/modules/_dc_map.scss */
+.interactive footer .logo {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem; }
+
+/* line 18, /Users/cyrus0012/proj/ratgraph/source/stylesheets/modules/_dc_map.scss */
+.interactive section {
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  box-pack: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  -o-justify-content: center;
+  justify-content: center;
+  -ms-flex-pack: center; }
+
+/* line 23, /Users/cyrus0012/proj/ratgraph/source/stylesheets/modules/_dc_map.scss */
+#filters {
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  box-pack: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  -o-justify-content: center;
+  justify-content: center;
+  -ms-flex-pack: center;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  box-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  align-items: center;
+  -ms-flex-align: center;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-direction: column; }
+
+/* line 30, /Users/cyrus0012/proj/ratgraph/source/stylesheets/modules/_dc_map.scss */
+#smallCharts {
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: stretch;
+  -moz-box-pack: stretch;
+  box-pack: stretch;
+  -webkit-justify-content: stretch;
+  -moz-justify-content: stretch;
+  -ms-justify-content: stretch;
+  -o-justify-content: stretch;
+  justify-content: stretch;
+  -ms-flex-pack: stretch;
+  -webkit-box-align: stretch;
+  -moz-box-align: stretch;
+  box-align: stretch;
+  -webkit-align-items: stretch;
+  -moz-align-items: stretch;
+  -ms-align-items: stretch;
+  -o-align-items: stretch;
+  align-items: stretch;
+  -ms-flex-align: stretch; }
+
+/* line 36, /Users/cyrus0012/proj/ratgraph/source/stylesheets/modules/_dc_map.scss */
+.filter, .reset {
+  font-size: .6rem; }
+
+/* line 40, /Users/cyrus0012/proj/ratgraph/source/stylesheets/modules/_dc_map.scss */
+#smallCharts > div {
+  width: 33.3%; }
+
+/* line 44, /Users/cyrus0012/proj/ratgraph/source/stylesheets/modules/_dc_map.scss */
+#filters > div {
+  width: 100%; }
+
+@media all and (orientation: landscape) {
+  /* line 49, /Users/cyrus0012/proj/ratgraph/source/stylesheets/modules/_dc_map.scss */
+  .interactive section {
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    box-orient: horizontal;
+    -webkit-flex-direction: row;
+    -moz-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-direction: row; }
+
+  /* line 53, /Users/cyrus0012/proj/ratgraph/source/stylesheets/modules/_dc_map.scss */
+  #choropleth {
+    width: 38.2%; }
+
+  /* line 57, /Users/cyrus0012/proj/ratgraph/source/stylesheets/modules/_dc_map.scss */
+  #filters {
+    width: 61.8%; }
+
+  /* line 61, /Users/cyrus0012/proj/ratgraph/source/stylesheets/modules/_dc_map.scss */
+  #histogram {
+    width: 100%; }
+
+  /* line 65, /Users/cyrus0012/proj/ratgraph/source/stylesheets/modules/_dc_map.scss */
+  #smallCharts {
+    width: 100%; } }
+@media all and (orientation: portrait) {
+  /* line 72, /Users/cyrus0012/proj/ratgraph/source/stylesheets/modules/_dc_map.scss */
+  .interactive section {
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    box-orient: vertical;
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-direction: column; }
+
+  /* line 76, /Users/cyrus0012/proj/ratgraph/source/stylesheets/modules/_dc_map.scss */
+  #choropleth {
+    width: 100%; }
+
+  /* line 80, /Users/cyrus0012/proj/ratgraph/source/stylesheets/modules/_dc_map.scss */
+  #filters {
+    width: 100%; }
+
+  /* line 84, /Users/cyrus0012/proj/ratgraph/source/stylesheets/modules/_dc_map.scss */
+  #histogram {
+    width: 100%; }
+
+  /* line 88, /Users/cyrus0012/proj/ratgraph/source/stylesheets/modules/_dc_map.scss */
+  #smallCharts {
+    width: 100%; } }
+/* line 93, /Users/cyrus0012/proj/ratgraph/source/stylesheets/modules/_dc_map.scss */
+.interactive h1 {
+  font-size: 1.5rem;
+  text-align: center;
+  margin: .5rem 0; }
+
+/* line 99, /Users/cyrus0012/proj/ratgraph/source/stylesheets/modules/_dc_map.scss */
+.interactive h2 {
+  font-size: 1rem;
+  display: inline;
+  margin: 2px; }
+
+/* line 105, /Users/cyrus0012/proj/ratgraph/source/stylesheets/modules/_dc_map.scss */
+#choropleth path {
+  stroke: gray;
+  stroke-linejoin: round; }
+
+/* line 110, /Users/cyrus0012/proj/ratgraph/source/stylesheets/modules/_dc_map.scss */
+#choropleth {
+  position: relative;
+  padding: 0px;
+  margin: 0px; }
+
+/* line 116, /Users/cyrus0012/proj/ratgraph/source/stylesheets/modules/_dc_map.scss */
+.interactive aside > div {
+  padding: 0px;
+  margin: 0px; }
+
+/* line 121, /Users/cyrus0012/proj/ratgraph/source/stylesheets/modules/_dc_map.scss */
+#legend {
+  position: absolute;
+  top: 3rem;
+  left: 1rem;
+  height: 30%;
+  min-height: 12rem; }
+
+/* line 129, /Users/cyrus0012/proj/ratgraph/source/stylesheets/modules/_dc_map.scss */
+.list-inline {
+  border: 1px solid lightgray;
+  padding: 5px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-content: stretch; }
+
+/* line 139, /Users/cyrus0012/proj/ratgraph/source/stylesheets/modules/_dc_map.scss */
+.list-inline, .list-inline > li {
+  list-style: none;
+  margin: 0; }
+
+/* line 144, /Users/cyrus0012/proj/ratgraph/source/stylesheets/modules/_dc_map.scss */
+.interactive li.key {
+  padding: 0;
+  display: block;
+  flex-grow: 1;
+  border-left-width: 15px;
+  border-left-style: solid;
+  font-size: .7rem;
+  height: 1.6rem;
+  padding-left: 5px;
+  padding-right: 0px;
+  padding-top: .2rem; }
+
+/* line 157, /Users/cyrus0012/proj/ratgraph/source/stylesheets/modules/_dc_map.scss */
+.clearfix {
+  clear: both; }
+
+/* line 161, /Users/cyrus0012/proj/ratgraph/source/stylesheets/modules/_dc_map.scss */
+.dc-chart g.row text {
+  fill: black;
+  font-size: 0.8rem; }
+
+/* line 166, /Users/cyrus0012/proj/ratgraph/source/stylesheets/modules/_dc_map.scss */
+.dc-chart .y-axis-label, .dc-chart .x-axis-label, #legend {
+  font-size: 0.8rem;
+  font-family: "Times New Roman", serif; }
+
+/* line 171, /Users/cyrus0012/proj/ratgraph/source/stylesheets/modules/_dc_map.scss */
+.dc-chart .axis text {
+  font-size: 0.7rem;
+  font-family: "Times New Roman", serif; }
