@@ -49,13 +49,13 @@ ratgraph.histogram = function (id, dimension, group) {
 	    _chart.xAxis().ticks(Math.max(histSize.width / 50, 2));
 	    _chart.yAxis().ticks(Math.max(histSize.height / 50, 2));
 		return _chart;		
-	}
+	};
 
 	_chart.resize = function() {
 		_chart._calculateSize();
 		_chart.render();
 	    return _chart;
-	}
+	};
 
 	return _chart._init()._calculateSize();
 };

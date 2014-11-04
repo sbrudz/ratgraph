@@ -6,6 +6,10 @@ ratgraph.bubble = function (id, dimension, group, demographics) {
 	var _dimension = dimension;
 	var _group = group;
 
+	var _formatIncomeAxis = d3.format("$s");
+	var _incomeFormat = d3.format("$.3s");
+	var _formatCount = d3.format(",.0f");
+
 	_chart._init = function(demographics) {
 
 	    var peopleExtent = d3.extent(demographics, function (d) {
@@ -57,26 +61,42 @@ ratgraph.bubble = function (id, dimension, group, demographics) {
 	        .label(function (p) {
 	            return p.key;
 	        })
-	        .renderTitle(true) // (optional) whether chart should render titles, :default = false
+	        .renderTitle(true)
 	        .title(function (p) {
-	            return ["Zip Code:" + (zipDemoIndex[p.key] ? zipDemoIndex[p.key].name : p.key),
-	            	   "# Complaints: " + formatCount(p.value.count),
-	                   "Pop. Density: " + formatCount(p.value.people_per_acre) + " people per acre",
-	                   "Median Income: " + incomeFormat(p.value.median_income)]
+	            return ["Zip Code:" + p.value.zip_name,
+	            	   "# Complaints: " + _formatCount(p.value.count),
+	                   "Pop. Density: " + _formatCount(p.value.people_per_acre) + " people per acre",
+	                   "Median Income: " + _incomeFormat(p.value.median_income)]
 	                   .join("\n");
 	        })
 	        .r(d3.scale.linear().domain([0, 2000]))
 	        .yAxis().tickFormat(function (v) {
-	            return formatIncomeAxis(v);
+	            return _formatIncomeAxis(v);
 	        });
 
 		var changeTopZipCodeSelection = function () {
-			demographicBubble.redraw();
+			_chart.redraw();
 		};
 	    d3.select("#topSelect").on("change", changeTopZipCodeSelection);
+
+	    d3.select(window).on('resize', _chart.resize);
 
 		return _chart;
 	};
 
-	return _chart.init(demographics);
+	_chart._calculateSize = function () {
+	    var svgSize = calculateSvgSize(_id, margin, 0.33);
+	    _chart.height(svgSize.height).width(svgSize.width);
+	    _chart.xAxis().ticks(Math.max(svgSize.width / 50, 2));
+	    _chart.yAxis().ticks(Math.max(svgSize.height / 50, 2));
+		return _chart;
+	};
+
+	_chart.resize = function() {
+		_chart._calculateSize();
+		_chart.render();
+	    return _chart;
+	};
+
+	return _chart._init(demographics);
 };
