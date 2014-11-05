@@ -5,6 +5,13 @@ ratgraph
 
 [ratgraph](http://ratgraph.nyc) is an interactive visualization of rat and rodent sightings in NYC based on data from the NYC Open Data portal.
 
+## Deployment
+
+Ratgraph lives on GitHub pages and uses the [middleman-gh-pages](https://github.com/neo/middleman-gh-pages) gem from Neo Innovation for publishing.  To deploy an update, run:
+```
+rake publish
+```
+
 ## Technology
 
 The visualization is based on the following javascript libraries:
@@ -12,7 +19,7 @@ The visualization is based on the following javascript libraries:
 * http://dc-js.github.io/dc.js/
 * http://square.github.io/crossfilter/
 
-HTML5 and SASS / CSS are used for content and layout.  It uses [Middleman](http://middlemanapp.com/) to handle static site generation.
+HTML5 and SASS / CSS are used for content and layout.  It uses [Middleman](http://middlemanapp.com/) to handle static site generation and [bourbon.io](http://bourbon.io/) for SASS mix-ins to make using the flexbox layout easier.
 
 ## Roadmap
 
