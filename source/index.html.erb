@@ -1,33 +1,59 @@
 ---
 title: RatGraph.nyc
 ---
-<%= partial "github" %>
-<section class="content">
-<h1>RatGraph: Visualization of Rat Sightings in NYC</h1>
-<p>
-	Rats! At times, they seem to be everywhere in New York City, scurrying across the subway tracks or into an dark alley.  They carry a variety of infectious bacteria, as a <a href="http://www.nydailynews.com/life-style/health/rats-nyc-carry-variety-infectious-bacteria-study-article-1.1974415">recent study</a> by researchers at Columbia University found.
-	The city of New York was rated the <a href="http://www.prnewswire.com/news-releases/chicago-holds-top-spot-on-rattiest-cities-list-278988971.html">4th rattiest city</a> in the country by Orkin.  
-</p>
+<article class="content">
+	<h1>RatGraph: Visualization of Rat Sightings in NYC</h1>
+	<p>
+		Rats! At times, they seem to be everywhere in New York City, scurrying across the subway tracks or into an dark alley.  They carry a variety of infectious bacteria, as a <a href="http://www.nydailynews.com/life-style/health/rats-nyc-carry-variety-infectious-bacteria-study-article-1.1974415">recent study</a> by researchers at Columbia University found.
+		The city of New York was rated the <a href="http://www.prnewswire.com/news-releases/chicago-holds-top-spot-on-rattiest-cities-list-278988971.html">4th rattiest city</a> in the country by Orkin.  
+	</p>
 
-<p>
-	The city makes much of its data on reported rat and rodent sightings available to the public. The visualization below uses the data from 311 calls to show how rat sightings vary over time and location.
-</p>
+	<p>
+		The city makes much of its data on reported rat and rodent sightings available to the public. The visualization below uses the data from 311 calls to show how rat sightings vary over time and location.
+	</p>
 
-<p class="graph-img">
-	<a href="interactive.html"><img src="images/ratgraph.png" alt="RatGraph Summary"/></a>
-	<span><a href="interactive.html">[+] View the interactive version of this graph</a></span>
-</p>
+	<p class="graph-img">
+		<a href="interactive.html"><img src="images/ratgraph.png" alt="RatGraph Summary"/></a>
+		<span><a href="interactive.html">[+] View the interactive version of this graph</a></span>
+	</p>
 
-<p>Time is particularly relevant because NYC is in the process of piloting <a href="http://www.nytimes.com/2013/03/12/nyregion/as-rats-escape-death-mta-turns-to-sterilization.html">a new rat control program</a> that uses a chemical, ContraPest® from <a href="http://senestech.com/">SenesTech Inc.</a>, to reduce rat fertility.</p>
+	<p>Time is particularly relevant because NYC is in the process of piloting <a href="http://www.nytimes.com/2013/03/12/nyregion/as-rats-escape-death-mta-turns-to-sterilization.html">a new rat control program</a> that uses a chemical, ContraPest® from <a href="http://senestech.com/">SenesTech Inc.</a>, to reduce rat fertility.</p>
 
-<p>For the scientifically inclined, the main active ingredient in ContraPest is 4-vinylcyclohexene diepoxide (VCD).  This <a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3307534/">paper</a> provides a good overview of what scientists know about its mechanism of action and effects.  In short, it seems to cause early menopause in female rats.</p>
+	<p>For the scientifically inclined, the main active ingredient in ContraPest is 4-vinylcyclohexene diepoxide (VCD).  This <a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3307534/">paper</a> provides a good overview of what scientists know about its mechanism of action and effects.  In short, it seems to cause early menopause in female rats.</p>
 
-<p>If the pilot portion of the study being conducted in 2014 is successful and NYC rolls out the program on a wider basis, the number of rat sightings over time should go down.</p>
+	<p>If the pilot portion of the study being conducted in 2014 is successful and NYC rolls out the program on a wider basis, the number of rat sightings over time should go down.</p>
 
-<p>You can clearly see some seasonal variation in the data.  The most dominant species of rat in NYC, the brown rat (rattus norvegicus), breeds year-around but mates more frequently in <a href="http://animaldiversity.ummz.umich.edu/accounts/Rattus_norvegicus/" title="University of Michigan Animal Diversity Web">the warmer months of the year</a> so this is a likely explanation for the variation.</p>
-<footer>
-<p>Steve Brudz</p>
-<p>October 2014</p>
-<p><a href="http://www.linkedin.com/in/sbrudz/"><img src="images/linked-in.png" alt="Linked In"/></a> <a href="https://github.com/sbrudz"><img src="images/github.png" alt="GitHub"/></a></p>
-</footer>
-</section>
+	<p>You can clearly see some seasonal variation in the data.  The most dominant species of rat in NYC, the brown rat (rattus norvegicus), breeds year-around but mates more frequently in <a href="http://animaldiversity.ummz.umich.edu/accounts/Rattus_norvegicus/" title="University of Michigan Animal Diversity Web">the warmer months of the year</a> so this is a likely explanation for the variation.</p>
+
+	<section>
+		<h2>About the Data</h2>
+		<p>
+			The rodent complaint data comes from <a href="https://data.cityofnewyork.us/Social-Services/Rodent-complaints-2010-to-present-more-columns/nvhx-79q8" target="_blank">NYC Open Data</a>.  About 10% of the records have a resolved date that is before the created date, sometimes as much as a few months before.  To determine the sighting date, this visualization uses the minimum of the created and resolved dates.
+		</p>
+		<p>
+			The income data is from the <a href="http://factfinder2.census.gov/faces/tableservices/jsf/pages/productview.xhtml?pid=ACS_12_5YR_S1903&amp;prodType=table">2008-2012 American Community Survey 5 Year Average</a> and the population data is from the <a href="http://factfinder2.census.gov/faces/tableservices/jsf/pages/productview.xhtml?pid=DEC_10_DP_G001&amp;prodType=table">2010 Diennial Census</a>.
+		</p>
+	</section>
+	<section>
+		<h2>Credits</h2>
+		<p>
+			Thank you to <a href="http://cyrusinnovation.com" target="_blank">Cyrus Innovation</a> and <a href="http://occom.co" target="_blank">Occom</a> for their support of this project.  Thank you to David Blinn for transitioning the site from Heroku to GitHub pages.
+		</p>
+		<p>
+			Thank you to <a href="http://guides.newman.baruch.cuny.edu/content.php?pid=95819&amp;sid=985209" target="_blank">Frank Donnelly</a> for his great <a href="http://guides.newman.baruch.cuny.edu/loader.php?type=d&amp;id=639903" target="_blank">explanation</a> of how to find census data and his <a href="http://www.baruch.cuny.edu/geoportal/maps/nyc/zip_to_zcta10_nyc.xls" target="_blank">zip code to ZCTA mapping</a>.
+			Thank you to Jon Roberts for his <a href="https://github.com/jonroberts/d3Mapping" target="_blank">NYC Zip Code Map.</a>	
+		</p>
+	</section>
+	<footer>
+		<p>
+			The source code and raw data for this project are publicly available on <a href="https://github.com/cyrusinnovation/ratgraph">Github</a>.
+		</p>
+		<p>
+			Visualization by <a href="http://www.linkedin.com/in/sbrudz/" rel="author">Steve Brudz</a> with the support of:
+		</p>
+		<div>
+			<a href="http://cyrusinnovation.com" target="_blank"><img src="images/cyrus_logo.png" alt="Cyrus Innovation"/></a>
+			<a href="http://occom.co" target="_blank"><img src="images/occom_logo.png" alt="Occom"/></a>
+		</div>
+	</footer>
+</article>
