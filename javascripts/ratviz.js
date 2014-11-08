@@ -273,6 +273,8 @@ ratgraph.bubble = function (id, dimension, group, demographics) {
 
 "use strict";
 
+var spinner = new Spinner().spin(document.body);
+
 var margin = {
     top: 10,
     left: 10,
@@ -487,6 +489,9 @@ function ready(error, rawData, nycZipJson, nycZipDemographics) {
     histogram.on('filtered', updateChloroplethScale);
 
     resize();
+
+    spinner.stop();
+    d3.select('#graph').style('visibility', 'visible');
 }
 
 function resize() {

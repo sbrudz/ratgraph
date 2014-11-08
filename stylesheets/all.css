@@ -4,7 +4,7 @@ html, body {
   font-family: "Times New Roman", serif; }
 
 /* line 8, /Users/sbrudz/Dev/ratgraph/source/stylesheets/base/_base.scss */
-section.content {
+.content {
   width: 800px;
   margin: auto; }
 
@@ -14,7 +14,7 @@ section.content {
     font-size: 14px; }
 
   /* line 15, /Users/sbrudz/Dev/ratgraph/source/stylesheets/base/_base.scss */
-  section.content {
+  .content {
     width: 90%; } }
 @media (max-width: 400px) {
   /* line 20, /Users/sbrudz/Dev/ratgraph/source/stylesheets/base/_base.scss */
@@ -33,11 +33,17 @@ p {
   text-align: center;
   display: block; }
 
+/* line 36, /Users/sbrudz/Dev/ratgraph/source/stylesheets/base/_base.scss */
+footer {
+  margin: 2% 0; }
+
 /* line 40, /Users/sbrudz/Dev/ratgraph/source/stylesheets/base/_base.scss */
-footer p {
-  margin: 0;
-  padding-right: 10px;
-  text-align: right; }
+footer div {
+  text-align: center; }
+
+/* line 44, /Users/sbrudz/Dev/ratgraph/source/stylesheets/base/_base.scss */
+footer img {
+  padding: 0 5%; }
 
 /*! normalize.css v2.0.1 | MIT License | git.io/normalize */
 /* ==========================================================================
@@ -389,23 +395,6 @@ table {
   border-spacing: 0; }
 
 /* line 1, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
-.interactive footer {
-  width: 100%;
-  padding: .5rem 0;
-  position: relative; }
-
-/* line 7, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
-.interactive footer p {
-  font-size: .7rem;
-  padding-left: 10rem; }
-
-/* line 12, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
-.interactive footer .logo {
-  position: absolute;
-  bottom: 2rem;
-  left: 2rem; }
-
-/* line 18, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
 .interactive section {
   display: -webkit-box;
   display: -moz-box;
@@ -424,7 +413,7 @@ table {
   justify-content: center;
   -ms-flex-pack: center; }
 
-/* line 23, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+/* line 6, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
 #filters {
   display: -webkit-box;
   display: -moz-box;
@@ -459,7 +448,7 @@ table {
   flex-direction: column;
   -ms-flex-direction: column; }
 
-/* line 30, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+/* line 13, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
 #smallCharts {
   display: -webkit-box;
   display: -moz-box;
@@ -487,20 +476,20 @@ table {
   align-items: stretch;
   -ms-flex-align: stretch; }
 
-/* line 36, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+/* line 19, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
 .filter, .reset {
   font-size: .6rem; }
 
-/* line 40, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+/* line 23, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
 #smallCharts > div {
   width: 33.3%; }
 
-/* line 44, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+/* line 27, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
 #filters > div {
   width: 100%; }
 
 @media all and (orientation: landscape) {
-  /* line 49, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+  /* line 32, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
   .interactive section {
     -webkit-box-orient: horizontal;
     -moz-box-orient: horizontal;
@@ -510,23 +499,23 @@ table {
     flex-direction: row;
     -ms-flex-direction: row; }
 
-  /* line 53, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+  /* line 36, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
   #choropleth {
     width: 38.2%; }
 
-  /* line 57, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+  /* line 40, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
   #filters {
     width: 61.8%; }
 
-  /* line 61, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+  /* line 44, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
   #histogram {
     width: 100%; }
 
-  /* line 65, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+  /* line 48, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
   #smallCharts {
     width: 100%; } }
 @media all and (orientation: portrait) {
-  /* line 72, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+  /* line 55, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
   .interactive section {
     -webkit-box-orient: vertical;
     -moz-box-orient: vertical;
@@ -536,50 +525,50 @@ table {
     flex-direction: column;
     -ms-flex-direction: column; }
 
-  /* line 76, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+  /* line 59, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
   #choropleth {
     width: 100%; }
 
-  /* line 80, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+  /* line 63, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
   #filters {
     width: 100%; }
 
-  /* line 84, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+  /* line 67, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
   #histogram {
     width: 100%; }
 
-  /* line 88, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+  /* line 71, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
   #smallCharts {
     width: 100%; } }
-/* line 93, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+/* line 76, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
 .interactive h1 {
   font-size: 1.5rem;
   text-align: center;
   margin: .5rem 0; }
 
-/* line 99, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+/* line 82, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
 .interactive h2 {
   font-size: 1rem;
   display: inline;
   margin: 2px; }
 
-/* line 105, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+/* line 88, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
 #choropleth path {
   stroke: gray;
   stroke-linejoin: round; }
 
-/* line 110, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+/* line 93, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
 #choropleth {
   position: relative;
   padding: 0px;
   margin: 0px; }
 
-/* line 116, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+/* line 99, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
 .interactive aside > div {
   padding: 0px;
   margin: 0px; }
 
-/* line 121, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+/* line 104, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
 #legend {
   position: absolute;
   top: 3rem;
@@ -587,7 +576,7 @@ table {
   height: 30%;
   min-height: 12rem; }
 
-/* line 129, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+/* line 112, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
 .list-inline {
   border: 1px solid lightgray;
   padding: 5px;
@@ -597,12 +586,12 @@ table {
   align-items: flex-start;
   align-content: stretch; }
 
-/* line 139, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+/* line 122, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
 .list-inline, .list-inline > li {
   list-style: none;
   margin: 0; }
 
-/* line 144, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+/* line 127, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
 .interactive li.key {
   padding: 0;
   display: block;
@@ -615,21 +604,21 @@ table {
   padding-right: 0px;
   padding-top: .2rem; }
 
-/* line 157, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+/* line 140, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
 .clearfix {
   clear: both; }
 
-/* line 161, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+/* line 144, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
 .dc-chart g.row text {
   fill: black;
   font-size: 0.8rem; }
 
-/* line 166, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+/* line 149, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
 .dc-chart .y-axis-label, .dc-chart .x-axis-label, #legend {
   font-size: 0.8rem;
   font-family: "Times New Roman", serif; }
 
-/* line 171, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+/* line 154, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
 .dc-chart .axis text {
   font-size: 0.7rem;
   font-family: "Times New Roman", serif; }
