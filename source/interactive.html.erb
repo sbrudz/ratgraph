@@ -2,7 +2,7 @@
 title: RatGraph.nyc Interactive Visualization
 ---
 <h1><a href="/">RatGraph.nyc</a>: Reported Rodent Complaints in NYC from 2010 to 2014</h1>
-<section id="graph" style="visibility: hidden;">
+<section id="graph" style="visibility: visible;">
 	<div id="choropleth">
 		<div id="legend"># Complaints</div>
 		<div>
@@ -12,6 +12,7 @@ title: RatGraph.nyc Interactive Visualization
 		</div>
 	</div>
 	<aside id="filters">
+		<div id="marker-map"></div>
 		<div id="demographicBubble">
 			<div>
 				<h2>Population Density vs. Median Income</h2>
@@ -61,4 +62,4 @@ title: RatGraph.nyc Interactive Visualization
 <script src="http://cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.11/crossfilter.min.js"></script>
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script src="http://d3js.org/queue.v1.min.js"></script>
-<%= javascript_include_tag  "dc", "lib/spin.min", "ratviz" %>
+<%= javascript_include_tag  "dc", "lib/spin.min", "lib/leaflet", "lib/leaflet.markercluster", "lib/dc.leaflet", "ratviz" %>

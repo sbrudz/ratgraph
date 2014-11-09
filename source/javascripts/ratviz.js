@@ -1,6 +1,7 @@
 //= require "_choropleth"
 //= require "_histogram"
 //= require "_bubble"
+//= require "_markermap"
 
 "use strict";
 
@@ -32,7 +33,7 @@ var formatCountAxis = d3.format("s");
 // Thanks to http://colorbrewer2.org/
 var colorScale = d3.scale.quantize().range(['rgb(255,255,204)','rgb(194,230,153)','rgb(120,198,121)','rgb(49,163,84)','rgb(0,104,55)']);
 
-var histogram = null, choropleth = null, bubble = null;
+var histogram = null, choropleth = null, bubble = null, markerMap = null;
 var boroughRow = dc.rowChart("#boroughRow");
 var typeRow = dc.rowChart("#typeRow");
 var topZipCodes = dc.rowChart("#topZipCodes");
@@ -140,6 +141,13 @@ function ready(error, rawData, nycZipJson, nycZipDemographics) {
         var name = zipDemoIndex[d.key] ? zipDemoIndex[d.key].name : d.key;
         return "Zip Code: " + name + "\n# Complaints: " + formatCount(d.value);
     });
+
+    var geoDim = data.dimension(function (d) {
+        return [d.lattitude,d.logitude];
+    });
+    var geoCount = geoDim.group().reduceCount();
+
+    markerMap = ratgraph.markerMap("#marker-map", geoDim, geoCount);
 
     histogram = ratgraph.histogram("#histogram", time, timeCounts);
 

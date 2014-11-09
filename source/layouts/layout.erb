@@ -11,7 +11,7 @@
     <!-- Use title if it's in the page YAML frontmatter -->
     <title><%= current_page.data.title || "Rat Viz" %></title>
 
-    <%= stylesheet_link_tag "vendor/dc", "all" %>
+    <%= stylesheet_link_tag "vendor/dc", "vendor/leaflet", "vendor/leaflet.markercluster", "all" %>
   </head>
 
   <body class="<%= page_classes %>">
