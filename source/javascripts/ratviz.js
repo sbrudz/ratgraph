@@ -17,8 +17,8 @@ var margin = {
 function calculateSvgSize(id, margin, heightRatio) {
     var width = parseInt(d3.select(id).style('width')),
         height = width * heightRatio;
-    width = Math.max(100, width - margin.left - margin.right);
-    height = Math.max(150, height - margin.top - margin.bottom);
+    width = Math.max(80, width - margin.left - margin.right);
+    height = Math.max(80, height - margin.top - margin.bottom);
     return {
         height: height,
         width: width
@@ -43,7 +43,8 @@ function complaintsParser(d) {
 		created_date: new Date(+d["Created Date"]),
 		zip_code: d["Incident Zip"],
 		borough: d["Borough"],
-		type: d["Descriptor"]
+		type: d["Descriptor"],
+        location: [+d["Latitude"], +d["Longitude"]]
 	};
 }
 
@@ -141,13 +142,6 @@ function ready(error, rawData, nycZipJson, nycZipDemographics) {
         var name = zipDemoIndex[d.key] ? zipDemoIndex[d.key].name : d.key;
         return "Zip Code: " + name + "\n# Complaints: " + formatCount(d.value);
     });
-
-    var geoDim = data.dimension(function (d) {
-        return [d.lattitude,d.logitude];
-    });
-    var geoCount = geoDim.group().reduceCount();
-
-    markerMap = ratgraph.markerMap("#marker-map", geoDim, geoCount);
 
     histogram = ratgraph.histogram("#histogram", time, timeCounts);
 

@@ -11,7 +11,8 @@
     <!-- Use title if it's in the page YAML frontmatter -->
     <title><%= current_page.data.title || "Rat Viz" %></title>
 
-    <%= stylesheet_link_tag "vendor/dc", "vendor/leaflet", "vendor/leaflet.markercluster", "all" %>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <%= stylesheet_link_tag "vendor/dc", "vendor/leaflet.markercluster", "all" %>
   </head>
 
   <body class="<%= page_classes %>">
