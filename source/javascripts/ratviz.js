@@ -1,7 +1,6 @@
 //= require "_choropleth"
 //= require "_histogram"
 //= require "_bubble"
-//= require "_markermap"
 
 "use strict";
 
