@@ -10,6 +10,10 @@ ratgraph.choropleth = function (id, dimension, group, colorScale, geoJson) {
 
 	_chart._init = function() {
 
+		var southWest = L.latLng(40.4856, -74.27238),
+		    northEast = L.latLng(40.92026, -73.69011),
+		    bounds = L.latLngBounds(southWest, northEast);
+
 		var mapSize = ratgraph.calculateSvgSize(_id, margin, 1);
 
 		d3.select(_id).style('height',mapSize.height+'px');
@@ -18,16 +22,19 @@ ratgraph.choropleth = function (id, dimension, group, colorScale, geoJson) {
 	        .height(mapSize.height)
 	        .dimension(_dimension)
 	        .group(_group)
+	        .mapOptions({
+	        	maxBounds: bounds
+	        })
 	        .tiles(function (map) {
 	        	var Stamen_TonerLite = L.tileLayer('http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png', {
 					attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
 					subdomains: 'abcd',
-					minZoom: 0,
+					minZoom: 10,
 					maxZoom: 20
 				});
 				Stamen_TonerLite.addTo(map);
 	        })
-			.center([40.739039, -73.920887])
+			.center([40.74023, -73.96202])
 			.zoom(11)
 	        .colors(_colorScale)
 			.colorDomain(function() {
@@ -68,7 +75,6 @@ ratgraph.choropleth = function (id, dimension, group, colorScale, geoJson) {
 	                var r = _chart.colors().invertExtent(d);
 	                return formatCount(r[0]);
 	            });
-
 	    });
 
 	    return _chart;
