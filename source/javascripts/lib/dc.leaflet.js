@@ -619,7 +619,7 @@ dc.leafletChoroplethChart = function (parent, chartGroup) {
             options = options(feature);
         }
         options = JSON.parse(JSON.stringify(options));
-        var v = _dataMap[_chart.featureKeyAccessor()(feature)];
+        var v = _chart.dataMap()[_chart.featureKeyAccessor()(feature)];
         if (v && v.d) {
             options.fillColor = _chart.getColor(v.d, v.i);
             if (_chart.filters().indexOf(v.d.key) !== -1) {
@@ -649,6 +649,10 @@ dc.leafletChoroplethChart = function (parent, chartGroup) {
             _dataMap[_chart.keyAccessor()(d)] = {'d': d, 'i': i};
         });
         _geojsonLayer.addData(_chart.geojson());
+    };
+
+    _chart.dataMap = function () {
+        return _dataMap;
     };
 
     _chart.geojson = function (_) {
@@ -708,7 +712,7 @@ dc.leafletChoroplethChart = function (parent, chartGroup) {
     };
 
     var processFeatures = function (feature, layer) {
-        var v = _dataMap[_chart.featureKeyAccessor()(feature)];
+        var v = _chart.dataMap()[_chart.featureKeyAccessor()(feature)];
         if (v && v.d) {
             layer.key = v.d.key;
             if (_chart.renderPopup()) {

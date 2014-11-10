@@ -47,6 +47,35 @@ ratgraph.choropleth = function (id, dimension, group, colorScale, geoJson) {
 			.featureKeyAccessor(function(feature) {
 				return feature.properties.ZIP;
 			})
+			.featureOptions({
+		        'fillColor': 'lightgray',
+		        'color': 'rgb(0,104,55)',
+		        'opacity': 0.8,
+		        'fillOpacity': 0.6,
+		        'weight': 1
+    		})
+    		.featureStyle(function (feature) {
+		        var options = _chart.featureOptions();
+		        if (options instanceof Function) {
+		            options = options(feature);
+		        }
+		        options = JSON.parse(JSON.stringify(options));
+		        var v = _chart.dataMap()[_chart.featureKeyAccessor()(feature)];
+		        if (v && v.d) {
+		        	if (v.d.value > 0) {
+			            options.fillColor = _chart.getColor(v.d, v.i);
+			        }
+		            if (_chart.filters().indexOf(v.d.key) !== -1) {
+		            	options.color = 'blue';
+		            	options.weight = 2;
+		            }
+		        }
+		        else {
+		        	options.fill = false;
+		        	options.stroke = false;
+		        }
+		        return options;
+		    })
 	        .geojson(_geoJson);
 
 	    _chart.calculateColorDomain();
