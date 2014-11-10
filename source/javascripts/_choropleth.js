@@ -10,7 +10,9 @@ ratgraph.choropleth = function (id, dimension, group, colorScale, geoJson) {
 
 	_chart._init = function() {
 
-		var mapSize = ratgraph.calculateSvgSize(_id, margin, 1.2);
+		var mapSize = ratgraph.calculateSvgSize(_id, margin, 1);
+
+		d3.select(_id).style('height',mapSize.height+'px');
 
 	    _chart.width(mapSize.width)
 	        .height(mapSize.height)
@@ -53,7 +55,7 @@ ratgraph.choropleth = function (id, dimension, group, colorScale, geoJson) {
 
 	    keys.enter().append('li')
 	        .attr('class', 'key')
-	        .style('border-left-color', String)
+	        .style('border-top-color', String)
 	        .text(function (d) {
 	            var r = _colorScale.invertExtent(d);
 	            return formatCount(r[0]);

@@ -38,7 +38,7 @@ ratgraph.histogram = function (id, dimension, group) {
 
 	    _chart.xAxis().tickFormat(_shortMonthTickFormat);
 
-	    d3.select(window).on('resize', _chart.resize);
+	    d3.select(window).on('resize.histogram', _chart.resize);
 
 		return _chart;
 	};

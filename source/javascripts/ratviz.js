@@ -16,8 +16,8 @@ var margin = {
 function calculateSvgSize(id, margin, heightRatio) {
     var width = parseInt(d3.select(id).style('width')),
         height = width * heightRatio;
-    width = Math.max(80, width - margin.left - margin.right);
-    height = Math.max(80, height - margin.top - margin.bottom);
+    width = Math.max(100, width - margin.left - margin.right);
+    height = Math.max(150, height - margin.top - margin.bottom);
     return {
         height: height,
         width: width
@@ -243,4 +243,4 @@ function resize() {
     dc.renderAll();
 }
 
-d3.select(window).on('resize', resize);
+d3.select(window).on('resize.rowCharts', resize);

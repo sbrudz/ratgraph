@@ -79,7 +79,7 @@ ratgraph.bubble = function (id, dimension, group, demographics) {
 		};
 	    d3.select("#topSelect").on("change", changeTopZipCodeSelection);
 
-	    d3.select(window).on('resize', _chart.resize);
+	    d3.select(window).on('resize.bubble', _chart.resize);
 
 		return _chart;
 	};
