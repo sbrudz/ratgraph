@@ -16,6 +16,15 @@ ratgraph.choropleth = function (id, dimension, group, colorScale, geoJson) {
 	        .height(mapSize.height)
 	        .dimension(_dimension)
 	        .group(_group)
+	        .tiles(function (map) {
+	        	var Stamen_TonerLite = L.tileLayer('http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png', {
+					attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+					subdomains: 'abcd',
+					minZoom: 0,
+					maxZoom: 20
+				});
+				Stamen_TonerLite.addTo(map);
+	        })
 			.center([40.739039, -73.920887])
 			.zoom(11)
 	        .colors(_colorScale)
