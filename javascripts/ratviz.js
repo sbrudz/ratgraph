@@ -25,52 +25,76 @@ ratgraph.calculateSvgSize = function(id, margin, heightRatio) {
 
 ratgraph.choropleth = function (id, dimension, group, colorScale, geoJson) {
 	var _id = id;
-	var _chart = dc.geoChoroplethChart(id);
+	var _chart = dc.leafletChoroplethChart(id);
 	var _dimension = dimension;
 	var _group = group;
 	var _colorScale = colorScale;
 	var _geoJson = geoJson;
 
-	// Figure out scale and translate for geo projection
-	// Thanks to http://stackoverflow.com/questions/14492284/center-a-map-in-d3-given-a-geojson-object
-	// Create a unit projection.
-	var _projection = d3.geo.albers()
-	    .scale(1)
-	    .translate([0, 0]);
-
-	// Create a path generator.
-	var _path = d3.geo.path()
-	    .projection(_projection);
-
 	_chart._init = function() {
 
-		var mapSize = ratgraph.calculateSvgSize(_id, margin, 1.2);
+		var southWest = L.latLng(40.4856, -74.27238),
+		    northEast = L.latLng(40.92026, -73.69011),
+		    bounds = L.latLngBounds(southWest, northEast);
 
-	    // Compute the bounds of a feature of interest, then derive scale & translate.
-	    var b = _path.bounds(_geoJson),
-	        s = 0.95 / Math.max((b[1][0] - b[0][0]) / mapSize.width, (b[1][1] - b[0][1]) / mapSize.height),
-	        t = [(mapSize.width - s * (b[1][0] + b[0][0])) / 2, (mapSize.height - s * (b[1][1] + b[0][1])) / 2];
-
-	    // Update the projection to use computed scale & translate.
-	    _projection
-	        .scale(s)
-	        .translate(t);
-
-	    _chart.width(mapSize.width)
-	        .height(mapSize.height)
+	    _chart
 	        .dimension(_dimension)
-	        .group(_group, "Rat Sightings by Zip Code")
+	        .group(_group)
+	        .mapOptions({
+	        	maxBounds: bounds
+	        })
+	        .tiles(function (map) {
+	        	var Stamen_TonerLite = L.tileLayer('http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png', {
+					attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+					subdomains: 'abcd',
+					minZoom: 10,
+					maxZoom: 20
+				});
+				Stamen_TonerLite.addTo(map);
+	        })
+			.center([40.74023, -73.96202])
+			.zoom(11)
 	        .colors(_colorScale)
+			.colorDomain(function() {
+				return [dc.utils.groupMin(this.group(), this.valueAccessor()),
+				dc.utils.groupMax(this.group(), this.valueAccessor())];
+			})
 	        .colorAccessor(function (d) {
 	            return d.value;
 	        })
-	        .colorCalculator(function (d) {
-	            return d ? _chart.colors()(d) : 'lightgray';
-	        })
-	        .overlayGeoJson(_geoJson.features, "zip_code", function (d) {
-	            return d.properties.ZIP;
-	        })
-	        .projection(_projection);
+			.featureKeyAccessor(function(feature) {
+				return feature.properties.ZIP;
+			})
+			.featureOptions({
+		        'fillColor': 'lightgray',
+		        'color': 'rgb(0,104,55)',
+		        'opacity': 0.8,
+		        'fillOpacity': 0.6,
+		        'weight': 1
+    		})
+    		.featureStyle(function (feature) {
+		        var options = _chart.featureOptions();
+		        if (options instanceof Function) {
+		            options = options(feature);
+		        }
+		        options = JSON.parse(JSON.stringify(options));
+		        var v = _chart.dataMap()[_chart.featureKeyAccessor()(feature)];
+		        if (v && v.d) {
+		        	if (v.d.value > 0) {
+			            options.fillColor = _chart.getColor(v.d, v.i);
+			        }
+		            if (_chart.filters().indexOf(v.d.key) !== -1) {
+		            	options.color = 'steelblue';
+		            	options.weight = 4;
+		            }
+		        }
+		        else {
+		        	options.fill = false;
+		        	options.stroke = false;
+		        }
+		        return options;
+		    })
+	        .geojson(_geoJson);
 
 	    _chart.calculateColorDomain();
 
@@ -81,13 +105,13 @@ ratgraph.choropleth = function (id, dimension, group, colorScale, geoJson) {
 	        .attr('class', 'list-inline');
 
 	    var keys = legend.selectAll('li.key')
-	        .data(colorScale.range());
+	        .data(_colorScale.range());
 
 	    keys.enter().append('li')
 	        .attr('class', 'key')
-	        .style('border-left-color', String)
+	        .style('border-top-color', String)
 	        .text(function (d) {
-	            var r = colorScale.invertExtent(d);
+	            var r = _colorScale.invertExtent(d);
 	            return formatCount(r[0]);
 	        });
 
@@ -98,13 +122,45 @@ ratgraph.choropleth = function (id, dimension, group, colorScale, geoJson) {
 	                var r = _chart.colors().invertExtent(d);
 	                return formatCount(r[0]);
 	            });
-
 	    });
+
+	    d3.select(window).on('resize.map', _chart.resize);
 
 	    return _chart;
 	};
 
-	return _chart._init();
+	_chart._calculateSize = function () {
+		var chartDiv = d3.select(_id);
+
+		var viewportWidth = document.documentElement.clientWidth;
+		var viewportHeight = document.documentElement.clientHeight;
+		var mapAspectRatio;
+		if (viewportHeight > viewportWidth) {
+			mapAspectRatio = 1;
+		}
+		else {
+			mapAspectRatio = (viewportHeight-60) / (viewportWidth / 2);
+		}
+
+		var width = parseInt(chartDiv.style('width'));
+		var height = width * mapAspectRatio;
+
+	    _chart.height(height).width(width);
+
+	    // leaflet needs a container with an explicit height
+		chartDiv.style('height',height+'px');
+
+		return _chart;
+	};
+
+	_chart.resize = function() {
+		_chart._calculateSize();
+		_chart.render();
+	    return _chart;
+	};
+
+
+	return _chart._init()._calculateSize();
 };
 
 ratgraph.histogram = function (id, dimension, group) {
@@ -145,7 +201,7 @@ ratgraph.histogram = function (id, dimension, group) {
 
 	    _chart.xAxis().tickFormat(_shortMonthTickFormat);
 
-	    d3.select(window).on('resize', _chart.resize);
+	    d3.select(window).on('resize.histogram', _chart.resize);
 
 		return _chart;
 	};
@@ -246,7 +302,7 @@ ratgraph.bubble = function (id, dimension, group, demographics) {
 		};
 	    d3.select("#topSelect").on("change", changeTopZipCodeSelection);
 
-	    d3.select(window).on('resize', _chart.resize);
+	    d3.select(window).on('resize.bubble', _chart.resize);
 
 		return _chart;
 	};
@@ -301,7 +357,7 @@ var formatCountAxis = d3.format("s");
 // Thanks to http://colorbrewer2.org/
 var colorScale = d3.scale.quantize().range(['rgb(255,255,204)','rgb(194,230,153)','rgb(120,198,121)','rgb(49,163,84)','rgb(0,104,55)']);
 
-var histogram = null, choropleth = null, bubble = null;
+var histogram = null, choropleth = null, bubble = null, markerMap = null;
 var boroughRow = dc.rowChart("#boroughRow");
 var typeRow = dc.rowChart("#typeRow");
 var topZipCodes = dc.rowChart("#topZipCodes");
@@ -311,7 +367,8 @@ function complaintsParser(d) {
 		created_date: new Date(+d["Created Date"]),
 		zip_code: d["Incident Zip"],
 		borough: d["Borough"],
-		type: d["Descriptor"]
+		type: d["Descriptor"],
+        location: [+d["Latitude"], +d["Longitude"]]
 	};
 }
 
@@ -511,4 +568,4 @@ function resize() {
     dc.renderAll();
 }
 
-d3.select(window).on('resize', resize);
+d3.select(window).on('resize.rowCharts', resize);

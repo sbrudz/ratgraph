@@ -1,50 +1,3 @@
-/* line 3, /Users/sbrudz/Dev/ratgraph/source/stylesheets/base/_base.scss */
-html, body {
-  font-size: 16px;
-  font-family: "Times New Roman", serif; }
-
-/* line 8, /Users/sbrudz/Dev/ratgraph/source/stylesheets/base/_base.scss */
-.content {
-  width: 800px;
-  margin: auto; }
-
-@media (max-width: 900px) {
-  /* line 14, /Users/sbrudz/Dev/ratgraph/source/stylesheets/base/_base.scss */
-  html, body {
-    font-size: 14px; }
-
-  /* line 15, /Users/sbrudz/Dev/ratgraph/source/stylesheets/base/_base.scss */
-  .content {
-    width: 90%; } }
-@media (max-width: 400px) {
-  /* line 20, /Users/sbrudz/Dev/ratgraph/source/stylesheets/base/_base.scss */
-  html, body {
-    font-size: 12px; } }
-/* line 23, /Users/sbrudz/Dev/ratgraph/source/stylesheets/base/_base.scss */
-p {
-  text-align: justify; }
-
-/* line 27, /Users/sbrudz/Dev/ratgraph/source/stylesheets/base/_base.scss */
-.graph-img img {
-  width: 100%; }
-
-/* line 31, /Users/sbrudz/Dev/ratgraph/source/stylesheets/base/_base.scss */
-.graph-img span {
-  text-align: center;
-  display: block; }
-
-/* line 36, /Users/sbrudz/Dev/ratgraph/source/stylesheets/base/_base.scss */
-footer {
-  margin: 2% 0; }
-
-/* line 40, /Users/sbrudz/Dev/ratgraph/source/stylesheets/base/_base.scss */
-footer div {
-  text-align: center; }
-
-/* line 44, /Users/sbrudz/Dev/ratgraph/source/stylesheets/base/_base.scss */
-footer img {
-  padding: 0 5%; }
-
 /*! normalize.css v2.0.1 | MIT License | git.io/normalize */
 /* ==========================================================================
    HTML5 display definitions
@@ -394,6 +347,104 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
+/* line 3, /Users/sbrudz/Dev/ratgraph/source/stylesheets/base/_base.scss */
+html, body {
+  font-size: 16px;
+  font-family: "Times New Roman", serif; }
+
+/* line 8, /Users/sbrudz/Dev/ratgraph/source/stylesheets/base/_base.scss */
+.content {
+  width: 800px;
+  margin: auto; }
+
+@media (max-width: 900px) {
+  /* line 14, /Users/sbrudz/Dev/ratgraph/source/stylesheets/base/_base.scss */
+  html, body {
+    font-size: 14px; }
+
+  /* line 15, /Users/sbrudz/Dev/ratgraph/source/stylesheets/base/_base.scss */
+  .content {
+    width: 90%; } }
+@media (max-width: 400px) {
+  /* line 20, /Users/sbrudz/Dev/ratgraph/source/stylesheets/base/_base.scss */
+  html, body {
+    font-size: 12px; } }
+/* line 23, /Users/sbrudz/Dev/ratgraph/source/stylesheets/base/_base.scss */
+p {
+  text-align: justify; }
+
+/* line 27, /Users/sbrudz/Dev/ratgraph/source/stylesheets/base/_base.scss */
+.graph-img img {
+  width: 100%; }
+
+/* line 31, /Users/sbrudz/Dev/ratgraph/source/stylesheets/base/_base.scss */
+.graph-img span {
+  text-align: center;
+  display: block; }
+
+/* line 36, /Users/sbrudz/Dev/ratgraph/source/stylesheets/base/_base.scss */
+footer {
+  margin: 2% 0; }
+
+/* line 40, /Users/sbrudz/Dev/ratgraph/source/stylesheets/base/_base.scss */
+footer div {
+  text-align: center; }
+
+/* line 44, /Users/sbrudz/Dev/ratgraph/source/stylesheets/base/_base.scss */
+footer img {
+  padding: 0 5%; }
+
+/* line 2, /Users/sbrudz/Dev/ratgraph/source/stylesheets/base/_buttons.scss */
+.button-link {
+  text-decoration: none;
+  padding: 0.2rem 0.5rem;
+  background: steelblue;
+  color: white;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border: solid 1px #20538D;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+  -webkit-transition-duration: 0.1s;
+  -moz-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+/* line 18, /Users/sbrudz/Dev/ratgraph/source/stylesheets/base/_buttons.scss */
+.button-link:hover {
+  background: #356094;
+  border: solid 1px #2A4E77;
+  text-decoration: none; }
+
+/* line 24, /Users/sbrudz/Dev/ratgraph/source/stylesheets/base/_buttons.scss */
+.button-link:active {
+  -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+  -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+  background: #2E5481;
+  border: solid 1px #203E5F; }
+
+/* line 1, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_filter_info.scss */
+.dc-chart {
+  position: relative; }
+
+/* line 5, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_filter_info.scss */
+.filter-panel {
+  position: absolute;
+  top: 5px;
+  right: 5px; }
+
+/* line 12, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_filter_info.scss */
+.filter-detail {
+  display: none; }
+
 /* line 1, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
 .interactive section {
   display: -webkit-box;
@@ -402,18 +453,9 @@ table {
   display: -webkit-flex;
   display: -moz-flex;
   display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -moz-box-pack: center;
-  box-pack: center;
-  -webkit-justify-content: center;
-  -moz-justify-content: center;
-  -ms-justify-content: center;
-  -o-justify-content: center;
-  justify-content: center;
-  -ms-flex-pack: center; }
+  display: flex; }
 
-/* line 6, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+/* line 5, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
 #filters {
   display: -webkit-box;
   display: -moz-box;
@@ -448,7 +490,7 @@ table {
   flex-direction: column;
   -ms-flex-direction: column; }
 
-/* line 13, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+/* line 12, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
 #smallCharts {
   display: -webkit-box;
   display: -moz-box;
@@ -476,20 +518,24 @@ table {
   align-items: stretch;
   -ms-flex-align: stretch; }
 
-/* line 19, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+/* line 18, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
 .filter, .reset {
-  font-size: .6rem; }
+  font-size: .7rem; }
 
-/* line 23, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+/* line 22, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
 #smallCharts > div {
   width: 33.3%; }
 
-/* line 27, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+/* line 26, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
 #filters > div {
   width: 100%; }
 
+/* line 30, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+.interactive {
+  margin: 10px; }
+
 @media all and (orientation: landscape) {
-  /* line 32, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+  /* line 35, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
   .interactive section {
     -webkit-box-orient: horizontal;
     -moz-box-orient: horizontal;
@@ -497,25 +543,35 @@ table {
     -webkit-flex-direction: row;
     -moz-flex-direction: row;
     flex-direction: row;
-    -ms-flex-direction: row; }
-
-  /* line 36, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
-  #choropleth {
-    width: 38.2%; }
+    -ms-flex-direction: row;
+    -webkit-box-align: start;
+    -moz-box-align: start;
+    box-align: start;
+    -webkit-align-items: flex-start;
+    -moz-align-items: flex-start;
+    -ms-align-items: flex-start;
+    -o-align-items: flex-start;
+    align-items: flex-start;
+    -ms-flex-align: start; }
 
   /* line 40, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
-  #filters {
-    width: 61.8%; }
+  #choropleth-wrapper {
+    width: 50%; }
 
   /* line 44, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+  #filters {
+    width: 50%;
+    margin-left: 10px; }
+
+  /* line 49, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
   #histogram {
     width: 100%; }
 
-  /* line 48, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+  /* line 53, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
   #smallCharts {
     width: 100%; } }
 @media all and (orientation: portrait) {
-  /* line 55, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+  /* line 60, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
   .interactive section {
     -webkit-box-orient: vertical;
     -moz-box-orient: vertical;
@@ -523,102 +579,114 @@ table {
     -webkit-flex-direction: column;
     -moz-flex-direction: column;
     flex-direction: column;
-    -ms-flex-direction: column; }
+    -ms-flex-direction: column;
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    box-pack: center;
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    -o-justify-content: center;
+    justify-content: center;
+    -ms-flex-pack: center; }
 
-  /* line 59, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
-  #choropleth {
-    width: 100%; }
-
-  /* line 63, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+  /* line 65, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
   #filters {
-    width: 100%; }
+    padding: 0px 10px; }
 
-  /* line 67, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+  /* line 69, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
   #histogram {
     width: 100%; }
 
-  /* line 71, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+  /* line 73, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
   #smallCharts {
     width: 100%; } }
-/* line 76, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+/* line 78, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+#choropleth {
+  position: relative;
+  width: 100%;
+  border: 1px solid lightgray; }
+
+/* line 84, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
 .interactive h1 {
   font-size: 1.5rem;
   text-align: center;
   margin: .5rem 0; }
 
-/* line 82, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+/* line 90, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
 .interactive h2 {
   font-size: 1rem;
   display: inline;
   margin: 2px; }
 
-/* line 88, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
-#choropleth path {
-  stroke: gray;
-  stroke-linejoin: round; }
-
-/* line 93, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
-#choropleth {
-  position: relative;
-  padding: 0px;
+/* line 96, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+#choropleth-wrapper {
+  padding: 0px 10px;
   margin: 0px; }
 
-/* line 99, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+/* line 101, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
 .interactive aside > div {
   padding: 0px;
   margin: 0px; }
 
-/* line 104, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
-#legend {
+/* line 106, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+#legend, #clear-map-button {
   position: absolute;
-  top: 3rem;
-  left: 1rem;
-  height: 30%;
-  min-height: 12rem; }
+  right: 10px;
+  z-index: 9999999;
+  width: 30%;
+  max-width: 150px; }
 
-/* line 112, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
-.list-inline {
+/* line 114, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+#legend {
+  font-size: 0.7rem;
+  font-family: "Times New Roman", serif;
+  padding-left: 5px;
+  top: 10px;
+  background-color: white;
   border: 1px solid lightgray;
-  padding: 5px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  align-content: stretch; }
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
+  border-radius: 4px; }
 
-/* line 122, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
-.list-inline, .list-inline > li {
+/* line 125, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+#legend ul {
+  padding: 3px 5px 3px 0px; }
+
+/* line 129, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+#legend ul, #legend li {
   list-style: none;
   margin: 0; }
 
-/* line 127, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
-.interactive li.key {
-  padding: 0;
-  display: block;
-  flex-grow: 1;
-  border-left-width: 15px;
-  border-left-style: solid;
-  font-size: .7rem;
-  height: 1.6rem;
-  padding-left: 5px;
-  padding-right: 0px;
-  padding-top: .2rem; }
-
-/* line 140, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
-.clearfix {
-  clear: both; }
+/* line 134, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+#legend li {
+  display: inline-block;
+  border-top-width: 0.75rem;
+  border-top-style: solid;
+  font-size: .6rem;
+  width: 20%;
+  padding-left: 0;
+  padding-right: 0; }
 
 /* line 144, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+#clear-map-button {
+  top: 65px;
+  text-align: center; }
+
+/* line 149, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+#clear-map-button .button-link {
+  color: white; }
+
+/* line 153, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
 .dc-chart g.row text {
   fill: black;
   font-size: 0.8rem; }
 
-/* line 149, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
-.dc-chart .y-axis-label, .dc-chart .x-axis-label, #legend {
+/* line 158, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+.dc-chart .y-axis-label, .dc-chart .x-axis-label {
   font-size: 0.8rem;
   font-family: "Times New Roman", serif; }
 
-/* line 154, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
+/* line 163, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
 .dc-chart .axis text {
   font-size: 0.7rem;
   font-family: "Times New Roman", serif; }
