@@ -66,8 +66,8 @@ ratgraph.choropleth = function (id, dimension, group, colorScale, geoJson) {
 			            options.fillColor = _chart.getColor(v.d, v.i);
 			        }
 		            if (_chart.filters().indexOf(v.d.key) !== -1) {
-		            	options.color = 'blue';
-		            	options.weight = 2;
+		            	options.color = 'steelblue';
+		            	options.weight = 4;
 		            }
 		        }
 		        else {

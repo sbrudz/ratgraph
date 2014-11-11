@@ -17,7 +17,7 @@
 }
 
 .filter, .reset {
-	font-size: .6rem;
+	font-size: .7rem;
 }
 
 #smallCharts > div {
@@ -101,16 +101,19 @@
 	margin: 0px;	
 }
 
+#legend, #clear-map-button {
+	position: absolute;
+	right: 10px;
+    z-index: 9999999;
+    width: 30%;
+    max-width: 150px;
+}
+
 #legend {
 	font-size: 0.7rem;
 	font-family: "Times New Roman", serif;
 	padding-left: 5px;
-    position: absolute;
     top: 10px;
-    right: 10px;
-    width: 30%;
-    max-width: 150px;
-    z-index: 9999999;
     background-color: white;
 	border: 1px solid lightgray;
 	box-shadow: 0 1px 5px rgba(0,0,0,0.65);
@@ -136,8 +139,13 @@
     padding-right: 0;
 }
 
-.clearfix {
-	clear: both;
+#clear-map-button {
+	top: 65px;
+	text-align: center;
+}
+
+#clear-map-button .button-link {
+	color: white;
 }
 
 .dc-chart g.row text {

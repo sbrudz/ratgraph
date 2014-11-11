@@ -1,0 +1,14 @@
+.dc-chart {
+	position: relative;
+}
+
+.filter-panel {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+}
+
+// Disabled until tooltips are implemented
+.filter-detail {
+	display: none;
+}

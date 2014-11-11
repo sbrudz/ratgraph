@@ -6,10 +6,9 @@ title: RatGraph.nyc Interactive Visualization
 	<div id="choropleth-wrapper">
 		<div>
 			<h2>By Zip Code</h2>
-			<span class="reset" style="display: none;">Current filter: <span class="filter"></span></span> 
-			<a class="reset" href="javascript:choropleth.filterAll();dc.redrawAll();" style="display: none;">reset</a>
 		</div>
 		<div id="choropleth">
+			<div id="clear-map-button"><a class="reset button-link" href="javascript:choropleth.filterAll();dc.redrawAll();" style="display: none;">Clear Selections</a></div>
 			<div id="legend"># Complaints</div>			
 		</div>
 	</div>
@@ -23,38 +22,28 @@ title: RatGraph.nyc Interactive Visualization
 					<option value="20">Top 20</option>
 					<option value="all">All</option>
 				</select> Zip Codes
-				<span class="reset" style="display: none;">Current filter: <span class="filter"></span></span> 
-				<a class="reset" href="javascript:bubble.filterAll();dc.redrawAll();" style="display: none;">reset</a>
 			</div>
+			<%= partial "filter_info_panel", :locals => { :chart_name => "bubble" } %>
 		</div>
 		<div id="smallCharts">
 			<div id="boroughRow">
-				<div>
-					<h2>By Borough</h2>
-					<span class="reset" style="display: none;">Current filter: <span class="filter"></span></span> 
-					<a class="reset" href="javascript:boroughRow.filterAll();dc.redrawAll();" style="display: none;">reset</a>
-				</div>
+				<h2>By Borough</h2>
+				<%= partial "filter_info_panel", :locals => { :chart_name => "boroughRow" } %>
 			</div>
 			<div id="topZipCodes">
-				<div>
-					<h2>Top 5 Zip Codes</h2>
-					<span class="reset" style="display: none;">Current filter: <span class="filter"></span></span> 
-					<a class="reset" href="javascript:topZipCodes.filterAll();dc.redrawAll();" style="display: none;">reset</a>
-				</div>
+				<h2>Top 5 Zip Codes</h2>
+				<%= partial "filter_info_panel", :locals => { :chart_name => "topZipCodes" } %>
 			</div>
 			<div id="typeRow">
-				<div>
-					<h2>By Complaint Type</h2>
-					<span class="reset" style="display: none;">Current filter: <span class="filter"></span></span> 
-					<a class="reset" href="javascript:typeRow.filterAll();dc.redrawAll();" style="display: none;">reset</a>
-				</div>
+				<h2>By Complaint Type</h2>
+				<%= partial "filter_info_panel", :locals => { :chart_name => "typeRow" } %>
 			</div>
 		</div>
 		<div id="histogram">
 			<div>
 				<h2>By Month</h2>
 				<span class="reset" style="display: none;">Current filter: <span class="filter"></span></span> 
-				<a class="reset" href="javascript:histogram.filterAll();dc.redrawAll();" style="display: none;">reset</a>
+				<a class="reset button-link" href="javascript:histogram.filterAll();dc.redrawAll();" style="display: none;">reset</a>
 			</div>
 		</div>
 	</aside>
