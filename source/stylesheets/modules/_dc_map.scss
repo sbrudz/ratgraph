@@ -1,6 +1,5 @@
 .interactive section {
 	@include display(flex);
-	@include justify-content(center);
 }
 
 #filters {
@@ -28,9 +27,14 @@
 	width: 100%;
 }
 
+.interactive {
+	margin: 10px;
+}
+
 @media all and (orientation: landscape) {
 	.interactive section {
 		@include flex-direction(row);
+		@include align-items(flex-start);
 	}
 
 	#choropleth-wrapper {
@@ -39,6 +43,7 @@
 
 	#filters {
 		width: 50%;
+		margin-left: 10px;
 	}
 
 	#histogram {
@@ -54,14 +59,11 @@
 @media all and (orientation: portrait) {
 	.interactive section {
 		@include flex-direction(column);
-	}
-
-	#choropleth-wrapper {
-		width: 100%;
+		@include justify-content(center);
 	}
 
 	#filters {
-		width: 100%;
+		padding: 0px 10px;
 	}
 
 	#histogram {

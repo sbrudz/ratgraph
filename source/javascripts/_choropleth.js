@@ -107,16 +107,27 @@ ratgraph.choropleth = function (id, dimension, group, colorScale, geoJson) {
 	};
 
 	_chart._calculateSize = function () {
+		var chartDiv = d3.select(_id);
+
 		var viewportWidth = document.documentElement.clientWidth;
 		var viewportHeight = document.documentElement.clientHeight;
-		var mapAspectRatio = Math.max((viewportHeight-60) / (viewportWidth / 2), 1);
-	    var mapSize = calculateSvgSize(_id, margin, mapAspectRatio);
-	    _chart.height(mapSize.height).width(mapSize.width);
+		var mapAspectRatio;
+		if (viewportHeight > viewportWidth) {
+			mapAspectRatio = 1;
+		}
+		else {
+			mapAspectRatio = (viewportHeight-60) / (viewportWidth / 2);
+		}
+
+		var width = parseInt(chartDiv.style('width'));
+		var height = width * mapAspectRatio;
+
+	    _chart.height(height).width(width);
 
 	    // leaflet needs a container with an explicit height
-		d3.select(_id).style('height',mapSize.height+'px');
+		chartDiv.style('height',height+'px');
 
-		return _chart;		
+		return _chart;
 	};
 
 	_chart.resize = function() {
