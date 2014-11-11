@@ -14,12 +14,7 @@ ratgraph.choropleth = function (id, dimension, group, colorScale, geoJson) {
 		    northEast = L.latLng(40.92026, -73.69011),
 		    bounds = L.latLngBounds(southWest, northEast);
 
-		var mapSize = ratgraph.calculateSvgSize(_id, margin, 1);
-
-		d3.select(_id).style('height',mapSize.height+'px');
-
-	    _chart.width(mapSize.width)
-	        .height(mapSize.height)
+	    _chart
 	        .dimension(_dimension)
 	        .group(_group)
 	        .mapOptions({
@@ -106,8 +101,30 @@ ratgraph.choropleth = function (id, dimension, group, colorScale, geoJson) {
 	            });
 	    });
 
+	    d3.select(window).on('resize.map', _chart.resize);
+
 	    return _chart;
 	};
 
-	return _chart._init();
+	_chart._calculateSize = function () {
+		var viewportWidth = document.documentElement.clientWidth;
+		var viewportHeight = document.documentElement.clientHeight;
+		var mapAspectRatio = Math.max((viewportHeight-60) / (viewportWidth / 2), 1);
+	    var mapSize = calculateSvgSize(_id, margin, mapAspectRatio);
+	    _chart.height(mapSize.height).width(mapSize.width);
+
+	    // leaflet needs a container with an explicit height
+		d3.select(_id).style('height',mapSize.height+'px');
+
+		return _chart;		
+	};
+
+	_chart.resize = function() {
+		_chart._calculateSize();
+		_chart.render();
+	    return _chart;
+	};
+
+
+	return _chart._init()._calculateSize();
 };
