@@ -31,7 +31,7 @@
 	margin: 10px;
 }
 
-@media all and (orientation: landscape) {
+@media all and (min-width: 801px) {
 	.interactive section {
 		@include flex-direction(row);
 		@include align-items(flex-start);
@@ -56,7 +56,7 @@
 
 }
 
-@media all and (orientation: portrait) {
+@media all and (max-width: 800px) {
 	.interactive section {
 		@include flex-direction(column);
 		@include justify-content(center);
