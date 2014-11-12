@@ -135,7 +135,7 @@ ratgraph.choropleth = function (id, dimension, group, colorScale, geoJson) {
 		var viewportWidth = document.documentElement.clientWidth;
 		var viewportHeight = document.documentElement.clientHeight;
 		var mapAspectRatio;
-		if (viewportHeight > viewportWidth) {
+		if (viewportWidth <= 800) {
 			mapAspectRatio = 1;
 		}
 		else {

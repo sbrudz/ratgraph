@@ -534,7 +534,7 @@ footer img {
 .interactive {
   margin: 10px; }
 
-@media all and (orientation: landscape) {
+@media all and (min-width: 801px) {
   /* line 35, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
   .interactive section {
     -webkit-box-orient: horizontal;
@@ -570,7 +570,7 @@ footer img {
   /* line 53, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
   #smallCharts {
     width: 100%; } }
-@media all and (orientation: portrait) {
+@media all and (max-width: 800px) {
   /* line 60, /Users/sbrudz/Dev/ratgraph/source/stylesheets/modules/_dc_map.scss */
   .interactive section {
     -webkit-box-orient: vertical;
