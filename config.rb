@@ -53,9 +53,7 @@ set :js_dir, 'javascripts'
 
 set :images_dir, 'images'
 
-after_configuration do
-  sprockets.append_path File.join root.to_s, "bower_components"
-end
+activate :jasmine
 
 # Build-specific configuration
 configure :build do

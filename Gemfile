@@ -23,6 +23,5 @@ gem "bourbon"
 
 gem 'middleman-gh-pages'
 
-group :development, :test do
-  gem 'jasmine'
-end
+gem 'middleman-jasmine'
+
