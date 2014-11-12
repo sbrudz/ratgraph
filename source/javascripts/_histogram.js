@@ -1,6 +1,8 @@
 //= require "_core"
 
 ratgraph.histogram = function (id, dimension, group) {
+	"use strict";
+
 	var _id = id;
 	var _chart = dc.barChart(id);
 	var _dimension = dimension;
