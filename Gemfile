@@ -22,3 +22,7 @@ gem "tzinfo-data", platforms: [:mswin, :mingw]
 gem "bourbon"
 
 gem 'middleman-gh-pages'
+
+group :development, :test do
+  gem 'jasmine'
+end

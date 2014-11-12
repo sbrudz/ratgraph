@@ -25,6 +25,8 @@ The visualization is based on the following javascript libraries:
 
 HTML5 and SASS / CSS are used for content and layout.  It uses [Middleman](http://middlemanapp.com/) to handle static site generation and [bourbon.io](http://bourbon.io/) for SASS mix-ins to make using the flexbox layout easier.
 
+For testing, I'm using [jasmine](http://jasmine.github.io/2.0/introduction.html).
+
 ## Roadmap
 
 * Support entering your zip code to quickly see all sighting data for your area
