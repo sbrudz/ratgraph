@@ -11,7 +11,11 @@
 #   - dist/**/*.js
 #
 src_files:
-  - javascripts/**/*.js
+  - javascripts/lib/crossfilter/*.js
+  - javascripts/lib/d3/*.js
+  - javascripts/lib/dc/*.js
+  - javascripts/lib/*.js
+  - javascripts/ratviz.js
 
 # stylesheets
 #
