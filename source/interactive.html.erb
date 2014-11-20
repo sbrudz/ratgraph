@@ -14,12 +14,26 @@ title: RatGraph.nyc Interactive Visualization
 	</div>
 	<aside id="filters">
 		<div id="demographicBubble">
+			<h2>By Demographics</h2>
 			<div>
-				<h2>Population Density vs. Median Income</h2>
+				<select id="xSelect">
+					<option value="density">Population Density</option>					
+					<option value="income">Median Income</option>			
+					<option value="education">Education Level</option>
+					<option value="vacancy">Vacancy Rate</option>
+					<option value="unit_age" selected="selected">Age of Housing</option>
+				</select> vs.
+				<select id="ySelect">
+					<option value="density">Population Density</option>					
+					<option value="income">Median Income</option>			
+					<option value="education" selected="selected">Education Level</option>
+					<option value="vacancy">Vacancy Rate</option>
+					<option value="unit_age">Age of Housing</option>
+				</select>
 				for <select id="topSelect">
 					<option value="5">Top 5</option>
 					<option value="10">Top 10</option>
-					<option value="20">Top 20</option>
+					<option value="20" selected="selected">Top 20</option>
 					<option value="all">All</option>
 				</select> Zip Codes
 			</div>

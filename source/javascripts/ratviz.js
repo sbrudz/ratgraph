@@ -53,6 +53,9 @@ function demographicsParser(d) {
 		people_per_acre: +d.people_per_acre,
 		median_income: +d.median_income,
 		land_area_acres: +d.land_area_acres,
+        percent_low_education: +d.percent_low_education,
+        percent_vacant_units: +d.percent_vacant_units,
+        percent_pre1950_units: +d.percent_pre1950_units,
 		name: d.name
 	};
 }
@@ -103,6 +106,9 @@ function ready(error, rawData, nycZipJson, nycZipDemographics) {
                 p.zip_name = zipDemoIndex[v.zip_code].name
                 p.people_per_acre = zipDemoIndex[v.zip_code].people_per_acre;
                 p.median_income = zipDemoIndex[v.zip_code].median_income;
+                p.percent_low_education = zipDemoIndex[v.zip_code].percent_low_education;
+                p.percent_vacant_units = zipDemoIndex[v.zip_code].percent_vacant_units;
+                p.percent_pre1950_units = zipDemoIndex[v.zip_code].percent_pre1950_units;
             }
             return p;
         }, 
