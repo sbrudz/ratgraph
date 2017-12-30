@@ -152,3 +152,9 @@ DEPENDENCIES
   rack-contrib
   tzinfo-data
   wdm (~> 0.1.0)
+
+RUBY VERSION
+   ruby 2.1.2p95
+
+BUNDLED WITH
+   1.16.1
