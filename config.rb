@@ -55,6 +55,8 @@ set :images_dir, 'images'
 
 activate :jasmine
 
+ignore '.idea/*'
+
 # Build-specific configuration
 configure :build do
   activate :relative_assets
