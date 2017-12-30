@@ -3,7 +3,14 @@ ratgraph
 
 ## Overview
 
-[ratgraph](http://ratgraph.nyc) is an interactive visualization of rat and rodent sightings in NYC based on data from the NYC Open Data portal.
+[ratgraph](https://sbrudz.github.io/ratgraph/) is an interactive visualization of rat and rodent sightings in NYC based on data from the NYC Open Data portal.
+
+## Development
+
+* Install the ruby version specified in the .ruby-version file
+* Make sure that bundler.io is installed
+* Run `bundle install` in the root of the project directory
+* Run `bundle exec middleman server` to start the development server
 
 ## Deployment
 
