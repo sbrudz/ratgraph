@@ -5,6 +5,8 @@ ratgraph
 
 [ratgraph](https://sbrudz.github.io/ratgraph/) is an interactive visualization of rat and rodent sightings in NYC based on data from the NYC Open Data portal.
 
+![ratgraph NYC image](https://sbrudz.github.io/ratgraph/images/ratgraph.png)
+
 ## Development
 
 * Install the ruby version specified in the .ruby-version file
